@@ -7,4 +7,4 @@ This repository contains tools for pulsar data analysis and aims to share useful
 Happy pulsar hunting!
 
 ##
-1. Plot pulsar timing residuals from TEMPO resid2.tmp files, residuals_plot.py.
+1. Plot pulsar timing residuals from TEMPO resid2.tmp files, `residuals_plot.py`.
