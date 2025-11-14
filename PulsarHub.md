@@ -85,7 +85,7 @@
 
 ## 
 ### Pulsar catalog
-`The ATNF Pulsar Catalogue`, ***https://www.atnf.csiro.au/research/pulsar/psrcat/***; `Pulsars in globular clusters`, ***https://www3.mpifr-bonn.mpg.de/staff/pfreire/GCpsr.html***; `GalacticMSPs`, ***https://pages.astro.umd.edu/~eferrara/pulsars/GalacticMSPs.txt***; `SpiderCAT`, ***https://astro.phys.ntnu.no/SpiderCAT/***; `Magnetar Catalog`, ***https://www.physics.mcgill.ca/~pulsar/magnetar/main.html***; `Fermi Pulsars`, ***https://fermi.gsfc.nasa.gov/ssc/data/access/lat/***, `RRATalog`, ***https://rratalog.github.io/rratalog/***; `Central Compact Objects (CCOs)`, ***https://www.iasf-milano.inaf.it/~deluca/cco/main.htm***; ``
+`The ATNF Pulsar Catalogue`, ***https://www.atnf.csiro.au/research/pulsar/psrcat/***; `Pulsars in globular clusters`, ***https://www3.mpifr-bonn.mpg.de/staff/pfreire/GCpsr.html***; `GalacticMSPs`, ***https://pages.astro.umd.edu/~eferrara/pulsars/GalacticMSPs.txt***; `SpiderCAT`, ***https://astro.phys.ntnu.no/SpiderCAT/***; `Magnetar Catalog`, ***https://www.physics.mcgill.ca/~pulsar/magnetar/main.html***; `Fermi Pulsars`, ***https://fermi.gsfc.nasa.gov/ssc/data/access/lat/***, `RRATalog`, ***https://rratalog.github.io/rratalog/***; `Central Compact Objects (CCOs)`, ***https://www.iasf-milano.inaf.it/~deluca/cco/main.htm***; 
 
 
 
