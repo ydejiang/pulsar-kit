@@ -1,6 +1,6 @@
 ## Pulsar catalog
 ### Pulsar search tools
-`PRESTO`, ***https://github.com/scottransom/presto***
+`PRESTO`, ***https://github.com/scottransom/presto***; ***https://github.com/jintaoluo/presto2_on_gpu***; ***https://github.com/zhejianglab/PrestoZL***; ***https://github.com/zdj649150499/Presto_GPU***
 
 `SIGPROC`, ***https://sigproc.sourceforge.net/***
 
