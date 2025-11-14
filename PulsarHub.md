@@ -1,5 +1,5 @@
 ## Pulsar catalog
-#### Pulsar search tools
+### Pulsar search tools
 PRESTO, ***https://github.com/scottransom/presto***
 
 SIGPROC, ***https://sigproc.sourceforge.net/***
@@ -20,4 +20,4 @@ Cobra, ***https://github.com/LindleyLentati/Cobra***
 
 Pulscan, ***https://github.com/jack-white1/pulscan***
 
-#### Pulsar timing tools
+### Pulsar timing tools
