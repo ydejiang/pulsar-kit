@@ -73,7 +73,7 @@
 
 `ProPlot`, ***https://proplot.readthedocs.io/en/stable/index.html***
 
-`Matplotlib`, ***https://matplotlib.org/***
+`Matplotlib`, ***https://matplotlib.org/***; `Color Hex Color Codes`, ***https://www.color-hex.com/***; `cncolor`, ***https://www.cncolor.cn/cncolor***; ***https://www.cncolor.cn/jingdianpeise***
 
 ##
 ### Literature website
