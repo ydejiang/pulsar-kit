@@ -1,7 +1,5 @@
 # pulsar-kit
-A toolkit for pulsar hunters.
-
-This repository contains tools for pulsar data analysis.
+A toolkit for pulsar hunters. This repository contains tools for pulsar data analysis.
 ##
-1. `residuals_plot.py`, plot pulsar timing residuals from TEMPO resid2.tmp file.
-2. `ACCEL_sift.py`, this is a modified version of `ACCEL_sift.py` from [PRESTO](https://www.cv.nrao.edu/~sransom/presto/) toolkit, offering greater flexibility by allowing users to specify custom input parameters.
+1. `residuals_plot.py`; this code generates publication-quality pulsar timing residual plots from [TEMPO](https://tempo.sourceforge.net/tempo_idx.html) resid2.tmp files.
+2. `ACCEL_sift.py`; a modified version of [PRESTO](https://www.cv.nrao.edu/~sransom/presto/) toolkit’s original script, allowing users to run the sifting routine directly with command-line input parameters for more flexible and convenient use.
