@@ -20,6 +20,8 @@ Cobra, ***https://github.com/LindleyLentati/Cobra***
 
 Pulscan, ***https://github.com/jack-white1/pulscan***
 
+PulsarHunter, ***https://www.pulsarastronomy.net/wiki/Software/PulsarHunter***
+
 Phase Characteristics, *****https://github.com/hqc-info/dmselect*****
 ##
 ### Pulsar timing tools
@@ -32,3 +34,24 @@ PINT, ***https://github.com/nanograv/PINT***
 DRACULA, ***https://github.com/pfreire163/Dracula***
 
 APT & APTB, ***https://github.com/Jackson-D-Taylor/APT***
+
+TempoNest, ***https://github.com/LindleyLentati/TempoNest***
+
+##
+### Pulsar Data Reduction
+DSPSR, ***http://dspsr.sourceforge.net/***
+
+PSRCHIVE, ***http://psrchive.sourceforge.net***
+
+PSRFITS_UTILS, ***https://github.com/demorest/psrfits_utils***
+
+
+
+
+
+
+
+
+
+
+
