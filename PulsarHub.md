@@ -49,6 +49,13 @@
 
 `pulsar-clock-corrections`, ***https://github.com/ipta/pulsar-clock-corrections***; ***https://ipta.github.io/pulsar-clock-corrections/***; ***https://github.com/NAOC-pulsar/FAST_ClockFile***
 
+`RPPPS`, ***https://github.com/qianlivan/***
+
+`PULSAR_MINER`, ***https://github.com/alex88ridolfi/PULSAR_MINER***
+
+
+
+
 ##
 ### Astronomer's blog
 `Scott Ransom`, ***https://www.cv.nrao.edu/~sransom/***; `Paulo Freire`, ***https://www3.mpifr-bonn.mpg.de/staff/pfreire/***; `Alessandro Ridolfi`, ***http://alex88ridolfi.altervista.org/***; ...
