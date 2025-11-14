@@ -22,7 +22,7 @@
 
 `PulsarHunter`, ***https://www.pulsarastronomy.net/wiki/Software/PulsarHunter***
 
-`Phase Characteristics`, ***https://github.com/hqc-info/dmselect****
+`Phase Characteristics`, ***https://github.com/hqc-info/dmselect***
 
 `pdmp`, ***https://psrchive.sourceforge.net/manuals/pdmp/***
 ##
