@@ -21,3 +21,12 @@ Cobra, ***https://github.com/LindleyLentati/Cobra***
 Pulscan, ***https://github.com/jack-white1/pulscan***
 ##
 ### Pulsar timing tools
+TEMPO, http://tempo.sourceforge.net
+
+TEMPO2, ***https://bitbucket.org/psrsoft/tempo2***
+
+PINT, ***https://github.com/nanograv/PINT*** 
+
+DRACULA, ***https://github.com/pfreire163/Dracula***
+
+APT & APTB, ***https://github.com/Jackson-D-Taylor/APT***
