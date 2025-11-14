@@ -19,9 +19,11 @@ SPIDER_TWISTER, ***http://alex88ridolfi.altervista.org/pagine/pulsar_software_SP
 Cobra, ***https://github.com/LindleyLentati/Cobra***
 
 Pulscan, ***https://github.com/jack-white1/pulscan***
+
+Phase Characteristics, *****https://github.com/hqc-info/dmselect*****
 ##
 ### Pulsar timing tools
-TEMPO, http://tempo.sourceforge.net
+TEMPO, ***http://tempo.sourceforge.net***
 
 TEMPO2, ***https://bitbucket.org/psrsoft/tempo2***
 
