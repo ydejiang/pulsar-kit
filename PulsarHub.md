@@ -27,17 +27,17 @@
 `pdmp`, ***https://psrchive.sourceforge.net/manuals/pdmp/***
 ##
 ### Pulsar timing tools
-TEMPO, ***http://tempo.sourceforge.net***
+`TEMPO`, ***http://tempo.sourceforge.net***
 
-TEMPO2, ***https://bitbucket.org/psrsoft/tempo2***
+`TEMPO2`, ***https://bitbucket.org/psrsoft/tempo2***
 
-PINT, ***https://github.com/nanograv/PINT*** 
+`PINT`, ***https://github.com/nanograv/PINT*** 
 
-DRACULA, ***https://github.com/pfreire163/Dracula***
+`DRACULA`, ***https://github.com/pfreire163/Dracula***
 
-APT & APTB, ***https://github.com/Jackson-D-Taylor/APT***
+`APT & APTB`, ***https://github.com/Jackson-D-Taylor/APT***
 
-TempoNest, ***https://github.com/LindleyLentati/TempoNest***
+`TempoNest`, ***https://github.com/LindleyLentati/TempoNest***
 
 ##
 ### Pulsar Data Reduction
@@ -46,6 +46,8 @@ TempoNest, ***https://github.com/LindleyLentati/TempoNest***
 `PSRCHIVE`, ***http://psrchive.sourceforge.net***
 
 `PSRFITS_UTILS`, ***https://github.com/demorest/psrfits_utils***
+
+`pulsar-clock-corrections`, ***https://github.com/ipta/pulsar-clock-corrections***; ***https://ipta.github.io/pulsar-clock-corrections/***; ***https://github.com/NAOC-pulsar/FAST_ClockFile***
 
 ##
 ### Astronomer's blog
