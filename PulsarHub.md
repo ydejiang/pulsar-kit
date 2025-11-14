@@ -64,7 +64,7 @@
 `Pulsar Spectra fit`, ***https://all-pulsar-spectra.readthedocs.io/en/latest/***
 
 ##
-### package
+### Package
 `PyGEDM: Galactic Electron Density Models`, ***https://apps.datacentral.org.au/pygedm/***
 
 `The psrqpy package`, ***https://psrqpy.readthedocs.io/en/latest/***
@@ -74,6 +74,13 @@
 `ProPlot`, ***https://proplot.readthedocs.io/en/stable/index.html***
 
 `Matplotlib`, ***https://matplotlib.org/***
+
+##
+### Literature website
+`Astrophysics Data System (ADS)`, ***https://ui.adsabs.harvard.edu/***; `Science Explorer (SciX)`, ***https://scixplorer.org/***; `arXiv`, ***https://arxiv.org/***; `INSPIRE`, ***https://inspirehep.net/***
+
+
+
 
 ##
 ### Astronomer's blog
