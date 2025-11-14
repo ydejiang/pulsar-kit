@@ -77,9 +77,15 @@
 
 ##
 ### Literature website
-`Astrophysics Data System (ADS)`, ***https://ui.adsabs.harvard.edu/***; `Science Explorer (SciX)`, ***https://scixplorer.org/***; `arXiv`, ***https://arxiv.org/***; `INSPIRE`, ***https://inspirehep.net/***
+`Astrophysics Data System (ADS)`, ***https://ui.adsabs.harvard.edu/***; `Science Explorer (SciX)`, ***https://scixplorer.org/***; `arXiv`, ***https://arxiv.org/***; `INSPIRE`, ***https://inspirehep.net/***; `Astronomy Image Explorer`, ***https://www.astroexplorer.org/***
 
 `The Astronomer's Telegram`, ***https://www.astronomerstelegram.org/***; `NASA's Time-Domain and Multimessenger Alert System`, ***https://gcn.nasa.gov/***
+
+`Overleaf`, ***https://www.overleaf.com***; `Sharelatex`, ***https://sharelatex.cstcloud.cn/project***
+
+## 
+### Pulsar catalog
+`The ATNF Pulsar Catalogue`, ***https://www.atnf.csiro.au/research/pulsar/psrcat/***; `Pulsars in globular clusters`, ***https://www3.mpifr-bonn.mpg.de/staff/pfreire/GCpsr.html***; `GalacticMSPs`, ***https://pages.astro.umd.edu/~eferrara/pulsars/GalacticMSPs.txt***; `SpiderCAT`, ***https://astro.phys.ntnu.no/SpiderCAT/***; `Magnetar Catalog`, ***https://www.physics.mcgill.ca/~pulsar/magnetar/main.html***; `Fermi Pulsars`, ***https://fermi.gsfc.nasa.gov/ssc/data/access/lat/***, `RRATalog`, ***https://rratalog.github.io/rratalog/***; `Central Compact Objects (CCOs)`, ***https://www.iasf-milano.inaf.it/~deluca/cco/main.htm***; ``
 
 
 
