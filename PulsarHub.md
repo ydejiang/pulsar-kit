@@ -53,8 +53,27 @@
 
 `PULSAR_MINER`, ***https://github.com/alex88ridolfi/PULSAR_MINER***
 
+`MOSS`, ***https://github.com/ydejiang/MOSS***
 
+##
+### Pulsar Data Reduction Tutorial
+`GMRT tutorials`, ***https://gmrt-tutorials.readthedocs.io/en/latest/***
 
+`UVA Group`, ***https://pulsar-observers.github.io/***
+
+`Pulsar Spectra fit`, ***https://all-pulsar-spectra.readthedocs.io/en/latest/***
+
+##
+### package
+`PyGEDM: Galactic Electron Density Models`, ***https://apps.datacentral.org.au/pygedm/***
+
+`The psrqpy package`, ***https://psrqpy.readthedocs.io/en/latest/***
+
+`ionFR`, ***https://github.com/csobey/ionFR***
+
+`ProPlot`, ***https://proplot.readthedocs.io/en/stable/index.html***
+
+`Matplotlib`, ***https://matplotlib.org/***
 
 ##
 ### Astronomer's blog
