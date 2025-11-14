@@ -79,6 +79,7 @@
 ### Literature website
 `Astrophysics Data System (ADS)`, ***https://ui.adsabs.harvard.edu/***; `Science Explorer (SciX)`, ***https://scixplorer.org/***; `arXiv`, ***https://arxiv.org/***; `INSPIRE`, ***https://inspirehep.net/***
 
+`The Astronomer's Telegram`, ***https://www.astronomerstelegram.org/***; `NASA's Time-Domain and Multimessenger Alert System`, ***https://gcn.nasa.gov/***
 
 
 
