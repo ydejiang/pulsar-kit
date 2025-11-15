@@ -81,7 +81,9 @@
     <td>
       <details><summary><code>pdmp</code></summary>https://psrchive.sourceforge.net/manuals/pdmp/</details>
     </td>
-    <td></td>
+    <td>
+    <details><summary><code>BASSET</code></summary>https://github.com/caojhNAOC/BASSET</details>
+    </td>
     <td></td>
   </tr>
 </table>
@@ -109,7 +111,9 @@
     <td>
       <details><summary><code>TempoNest</code></summary>https://github.com/LindleyLentati/TempoNest</details>
     </td>
-    <td></td>
+    <td>
+    <details><summary><code>pulsar-clock-corrections</code></summary>https://github.com/ipta/pulsar-clock-corrections<br>https://ipta.github.io/pulsar-clock-corrections/<br>https://github.com/NAOC-pulsar/FAST_ClockFile</details>
+    </td>
     <td></td>
     <td></td>
     <td></td>
@@ -129,7 +133,7 @@
       <details><summary><code>PSRFITS_UTILS</code></summary>https://github.com/demorest/psrfits_utils</details>
     </td>
     <td>
-      <details><summary><code>pulsar-clock-corrections</code></summary>https://github.com/ipta/pulsar-clock-corrections<br>https://ipta.github.io/pulsar-clock-corrections/<br>https://github.com/NAOC-pulsar/FAST_ClockFile</details>
+      <details><summary><code>FRBGui</code></summary>https://github.com/mef51/frbgui<br>https://frbgui.readthedocs.io/en/latest/</details>
     </td>
     <td>
       <details><summary><code>RPPPS</code></summary>https://github.com/qianlivan/</details>
@@ -142,7 +146,9 @@
     <td>
       <details><summary><code>MOSS</code></summary>https://github.com/ydejiang/MOSS</details>
     </td>
-    <td></td>
+    <td>
+   <details><summary><code>Your Unified Reader</code></summary>https://github.com/thepetabyteproject/your<br>https://thepetabyteproject.github.io/your/0.6.6/<br>https://thepetabyteproject.github.io/</details>
+    </td>
     <td></td>
     <td></td>
   </tr>
@@ -163,7 +169,7 @@
       <details><summary><code>ProPlot</code></summary>https://proplot.readthedocs.io/en/stable/index.html</details>
     </td>
     <td>
-      <details><summary><code>Matplotlib</code></summary>https://matplotlib.org/<br>https://www.color-hex.com/<br>https://www.cncolor.cn/cncolor<br>https://www.cncolor.cn/jingdianpeise<br>https://www.webdesignrankings.com/resources/lolcolors/</details>
+      <details><summary><code>Matplotlib</code></summary>https://matplotlib.org/<br>https://www.color-hex.com/<br>https://www.cncolor.cn/cncolor<br>https://www.cncolor.cn/jingdianpeise<br>https://www.webdesignrankings.com/resources/lolcolors/<br>https://github.com/garrettj403/SciencePlots</details>
     </td>
   </tr>
   <tr>
@@ -190,8 +196,12 @@
     <td>
       <details><summary><code>Pulsar Spectra fit</code></summary>https://all-pulsar-spectra.readthedocs.io/en/latest/</details>
     </td>
-    <td></td>
-    <td></td>
+    <td>
+     <details><summary><code>Workshop at nwu</code></summary>https://nwupulsar2023.github.io/index.html</details>
+    </td>
+    <td>
+       <details><summary><code>binpulsars</code></summary>https://www.spaceacademy.net.au/env/star/bnp/.htm</details>
+    </td>
   </tr>
 </table>
 
@@ -213,14 +223,8 @@
     <td>
       <details><summary><code>Pulsar Data Analysis Reference</code></summary>https://www.atnf.csiro.au/people/Lawrence.Toomey/pulsarref/</details>
     </td>
-  </tr>
+   </tr>
   <tr>
-    <td>
-      <details><summary><code>Workshop at nwu</code></summary>https://nwupulsar2023.github.io/index.html</details>
-    </td>
-    <td>
-      <details><summary><code>binpulsars</code></summary>https://www.spaceacademy.net.au/env/star/bnp/.htm</details>
-    </td>
     <td>
       <details><summary><code>PULSAR SEARCH</code></summary>https://www.cv.nrao.edu/~sransom/PRESTO_search_tutorial.pdf<br>https://www.cv.nrao.edu/~sransom/accel_accel_searches.pdf<br>A Fourier Domain “Jerk” Search for Binary Pulsars
 :https://ui.adsabs.harvard.edu/abs/2018ApJ...863L..13A/abstract<br>A New Search Technique for Short Orbital Period Binary Pulsars:https://ui.adsabs.harvard.edu/abs/2003ApJ...589..911R/abstract<br>Pulsar searches: From radio to gamma-rays
@@ -231,7 +235,11 @@
       <details><summary><code>Frontiers of Modern Astronomy</code></summary>https://www.jb.man.ac.uk/distance/frontiers/</details>
     </td>
     <td>
-      <details><summary><code>Fermi-LAT</code></summary>https://meetings.iac.es/winterschool/2015/media/lectures/Ferrara_lecture6.html</details>
+      <details><summary><code>review</code></summary>Gravity experiments with radio pulsars:https://link.springer.com/article/10.1007/s41114-024-00051-y<br>Binary and Millisecond Pulsars:https://link.springer.com/article/10.12942/lrr-2008-8<br>The pulsar population in Globular Clusters and in the Galaxy:https://ui.adsabs.harvard.edu/abs/2013IAUS..291..243F/abstract<br>Strong-Field Gravity Tests with the Double Pulsar:https://ui.adsabs.harvard.edu/abs/2021PhRvX..11d1050K/abstract<br>Millisecond Pulsars, their Evolution and Applications:https://link.springer.com/article/10.1007/s12036-017-9469-2<br>Millisecond Pulsars:https://link.springer.com/book/10.1007/978-3-030-85198-9<br>Handbook of Pulsar Astronomy, Pulsar Astronomy (Fifth Edition): download from Z-Library</details>
+    </td>
+    <td>
+    </td>
+    <td>
     </td>
   </tr>
 </table>
@@ -240,10 +248,10 @@
 <table>
   <tr>
     <td>
-      <details><summary><code>Astrophysics Data System (ADS)</code></summary>https://ui.adsabs.harvard.edu/</details>
+      <details><summary><code>ADS</code></summary>https://ui.adsabs.harvard.edu/</details>
     </td>
     <td>
-      <details><summary><code>Science Explorer (SciX)</code></summary>https://scixplorer.org/</details>
+      <details><summary><code>SciX</code></summary>https://scixplorer.org/</details>
     </td>
     <td>
       <details><summary><code>arXiv</code></summary>https://arxiv.org/</details>
@@ -286,5 +294,6 @@
   </tr>
 </table>
 
-
-
+##
+@Dejiang Yin
+##
