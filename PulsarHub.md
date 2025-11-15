@@ -99,8 +99,7 @@
 `Scott Ransom`, ***https://www.cv.nrao.edu/~sransom/***; `Paulo Freire`, ***https://www3.mpifr-bonn.mpg.de/staff/pfreire/***; `Alessandro Ridolfi`, ***http://alex88ridolfi.altervista.org/***; ...
 
 ##
-`Scott Ransom`
-<details>
+`Scott Ransom`<details>
 <summary></summary>
 ***https://www.cv.nrao.edu/~sransom/***;
 </details>
