@@ -99,11 +99,10 @@
 `Scott Ransom`, ***https://www.cv.nrao.edu/~sransom/***; `Paulo Freire`, ***https://www3.mpifr-bonn.mpg.de/staff/pfreire/***; `Alessandro Ridolfi`, ***http://alex88ridolfi.altervista.org/***; ...
 
 ##
-
+`Scott Ransom`
 <details>
-<summary>$ \triangle $ 点击展开查看网站链接</summary>
-- 百度：[百度搜索](https://www.baidu.com)
-- 掘金：[掘金技术社区](https://juejin.cn)
+<summary>
+***https://www.cv.nrao.edu/~sransom/***;
 </details>
 
 <details>
