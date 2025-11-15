@@ -106,6 +106,11 @@
 - 掘金：[掘金技术社区](https://juejin.cn)
 </details>
 
+<details>
+<summary>△ 点击展开查看网站链接</summary>
+- 百度：[https://www.baidu.com](https://www.baidu.com)
+- 知乎：[https://www.zhihu.com](https://www.zhihu.com)
+</details>
 
 
 
