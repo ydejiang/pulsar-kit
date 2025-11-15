@@ -101,7 +101,7 @@
 ##
 `Scott Ransom`
 <details>
-<summary>
+<summary></summary>
 ***https://www.cv.nrao.edu/~sransom/***;
 </details>
 
