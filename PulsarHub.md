@@ -99,26 +99,10 @@
 `Scott Ransom`, ***https://www.cv.nrao.edu/~sransom/***; `Paulo Freire`, ***https://www3.mpifr-bonn.mpg.de/staff/pfreire/***; `Alessandro Ridolfi`, ***http://alex88ridolfi.altervista.org/***; ...
 
 ##
-`Scott Ransom`<details>
-<summary></summary>
-***https://www.cv.nrao.edu/~sransom/***;
-</details>
-
 
 
 <details style="display: inline;">
-  <summary style="display: inline; list-style: none;">`Scott Ransom` ▶️</summary>
+  <summary style="display: inline; list-style: none;">`Scott Ransom`</summary>
   <a href="https://www.cv.nrao.edu/~sransom/" target="_blank">https://www.cv.nrao.edu/~sransom/</a>
 </details>
-
-
-
-<details style="display: inline;">
-  <summary style="display: inline; list-style: none;">`Scott Ransom` ▶️</summary>
-  <a href="https://www.cv.nrao.edu/~sransom/" target="_blank">https://www.cv.nrao.edu/~sransom/</a>
-</details>
-
-<style>
-  summary::-webkit-details-marker { display: none; } /* 隐藏默认图标（Web环境） */
-</style>
 
