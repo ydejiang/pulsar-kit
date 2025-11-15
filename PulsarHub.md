@@ -104,6 +104,21 @@
 ***https://www.cv.nrao.edu/~sransom/***;
 </details>
 
+
+`Scott Ransom` ➤
+<details>
+<summary style="display: inline;">点击展开博客链接</summary>
+***https://www.cv.nrao.edu/~sransom/***
+</details>
+
+
+`Scott Ransom` ▶️
+<details>
+<summary style="display: inline; cursor: pointer;"></summary>
+***https://www.cv.nrao.edu/~sransom/***
+</details>
+
+
 <details>
 <summary></summary>
 - 百度：[https://www.baidu.com](https://www.baidu.com)
