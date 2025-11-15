@@ -106,7 +106,7 @@
 </details>
 
 <details>
-<summary>△</summary>
+<summary></summary>
 - 百度：[https://www.baidu.com](https://www.baidu.com)
 - 知乎：[https://www.zhihu.com](https://www.zhihu.com)
 </details>
