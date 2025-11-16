@@ -31,7 +31,9 @@
     <td>
       <details><summary><code>Pulsar Survey Scraper</code></summary>https://pulsar.cgca-hub.org/</details>
     </td>
-    <td></td>
+    <td>
+      <details><summary><code>Coordinate systems</code></summary>The Strasbourg astronomical Data Center (CDS):https://cds.unistra.fr/<br><br>Coordinate Conversion:http://heasarc.gsfc.nasa.gov/cgi-bin/Tools/convcoord/convcoord.pl<br><br>Object finder:<br>SIMBAD:https://simbad.u-strasbg.fr/simbad/sim-fcoo<br>Aladin Lite:https://aladin.cds.unistra.fr/AladinLite/<br>SDSS:https://skyserver.sdss.org/dr9/en/tools/chart/navi.asp<br>GAIA:https://gea.esac.esa.int/archive/<br>MAST:https://archive.stsci.edu/<br>Chandra Data Archive:https://cxcfps.cfa.harvard.edu/cda/footprint/cdaview.html<br><br>Galactic Supernova Remnants:https://www.mrao.cam.ac.uk/surveys/snrs/<br>MILKY WAY GLOBULAR CLUSTERS:https://physics.mcmaster.ca/~harris/mwgc.dat, https://people.smp.uq.edu.au/HolgerBaumgardt/globular/<br>Open Cluster:https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114#/article<br><br>Pulsar Parallaxes:https://hosting.astro.cornell.edu/research/parallax/</details>
+    </td>
   </tr>
 </table>
 
@@ -59,7 +61,7 @@
       <details><summary><code>RIPTIDE</code></summary>https://github.com/v-morello/riptide<br>https://riptide-ffa.readthedocs.io/en/latest/</details>
     </td>
     <td>
-      <details><summary><code>PYSOLATOR</code></summary>http://alex88ridolfi.altervista.org/pagine/pulsar_software_PYSOLATOR.html</details>
+      <details><summary><code>PYSOLATOR</code></summary>http://alex88ridolfi.altervista.org/pagine/pulsar_software_PYSOLATOR.html<br>https://github.com/mcbernadich/demodulate-search</details>
     </td>
     <td>
       <details><summary><code>SPIDER_TWISTER</code></summary>http://alex88ridolfi.altervista.org/pagine/pulsar_software_SPIDER_TWISTER.html</details>
@@ -149,8 +151,12 @@
     <td>
    <details><summary><code>Your Unified Reader</code></summary>https://github.com/thepetabyteproject/your<br>https://thepetabyteproject.github.io/your/0.6.6/<br>https://thepetabyteproject.github.io/</details>
     </td>
-    <td></td>
-    <td></td>
+    <td>
+      <details><summary><code>Scintools</code></summary>https://github.com/danielreardon/scintools</details>
+    </td>
+    <td>
+      <details><summary><code>clfd</code></summary>https://github.com/v-morello/clfd</details>
+    </td>
   </tr>
 </table>
 
@@ -202,6 +208,9 @@
     <td>
        <details><summary><code>binpulsars</code></summary>https://www.spaceacademy.net.au/env/star/bnp/.htm</details>
     </td>
+      <td>
+       <details><summary><code>NANOGrav</code></summary>https://github.com/nanograv</details>
+    </td>
   </tr>
 </table>
 
@@ -237,6 +246,7 @@
     <td>
       <details><summary><code>review</code></summary>Gravity experiments with radio pulsars:https://link.springer.com/article/10.1007/s41114-024-00051-y<br>Binary and Millisecond Pulsars:https://link.springer.com/article/10.12942/lrr-2008-8<br>The pulsar population in Globular Clusters and in the Galaxy:https://ui.adsabs.harvard.edu/abs/2013IAUS..291..243F/abstract<br>Strong-Field Gravity Tests with the Double Pulsar:https://ui.adsabs.harvard.edu/abs/2021PhRvX..11d1050K/abstract<br>Millisecond Pulsars, their Evolution and Applications:https://link.springer.com/article/10.1007/s12036-017-9469-2<br>Millisecond Pulsars:https://link.springer.com/book/10.1007/978-3-030-85198-9<br>Handbook of Pulsar Astronomy, Pulsar Astronomy (Fifth Edition): download from Z-Library</details>
     </td>
+      <details><summary><code>MILESTONES</code></summary>http://alex88ridolfi.altervista.org/pagine/pulsar_literature.html</details>
     <td>
     </td>
     <td>
@@ -294,6 +304,6 @@
   </tr>
 </table>
 
+
 ##
-@Dejiang Yin
-##
+@Dejiang Yin, Yujie Chen, Yinfeng Dai
