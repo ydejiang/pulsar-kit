@@ -177,8 +177,6 @@
     <td>
       <details><summary><code>Matplotlib</code></summary>https://matplotlib.org/<br>https://www.color-hex.com/<br>https://www.cncolor.cn/cncolor<br>https://www.cncolor.cn/jingdianpeise<br>https://www.webdesignrankings.com/resources/lolcolors/<br>https://github.com/garrettj403/SciencePlots<br><br>ProPlot:https://proplot.readthedocs.io/en/stable/index.html<br>Pylustrator:https://github.com/rgerum/pylustrator</details>
     </td>
-    <td>
-    </td>
   </tr>
   <tr>
     <td>
