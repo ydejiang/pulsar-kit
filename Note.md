@@ -6,6 +6,7 @@ ls *.zst | xargs -n1 -P30 -I{} zstd --rm -d {}
 ls *.xz | xargs -n1 -I{} -P50 xz -d  {}
 ```
 
+### docker
 ```
 docker ps -a
 docker start ab2c65b5c89b
@@ -34,7 +35,20 @@ ls -dv /root/sj-tmp/ydj/NGC6517_2025/*/*/bary_dat/ | xargs -n1 -I{} echo "cd {} 
 prepsubband -nobary -nsub 128 -subdm 182.50 -sub -mask ../NGC6517_20200123_rfifind.mask -o NGC6517_20200123 ""${File_Path}""/*.fits
 prepsubband -nobary -nsub 128 -subdm 182.50 -sub -mask ../*.mask -o NGC6517_20200120 ${a}
 prepfold -nosearch -noxwin -topo -dm 182.00 -n 256 -npart 256  -accelcand 6 -accelfile NGC6517_20191017_DM182.00_ACCEL_0.cand ./subbands/NGC6517_20191017_DM182.00.sub???
+###-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**pdmp:
+psredit -c itrf:ant_x=-1668557.2070983793 -m J1801-0857B_1.par.ar.pazi
+psredit -c itrf:ant_y=5506838.5266271923 -m J1801-0857B_1.par.ar.pazi
+psredit -c itrf:ant_z=2744934.9655897617 -m J1801-0857B_1.par.ar.pazi
+psredit -c coord=18:01:50.52-08:57.31.6 -m  J1801-0857B_1.par.ar.pazi
 
+### 不修改坐标的结果如下：
+[yindejiang@localhost search_bin]$ pdmp -dr 20 -ds 0.1 -pr 1000 -ps 1  -g J1801-0857B-c0.02896-DM170.ar.pazi1.ps/cps J1801-0857B-c0.02896-DM170.ar.pazi
+
+ls -v  *.pazi| xargs -n1 -I{} echo "psredit -c itrf:ant_x=-1668557.2070983793 -m {} && psredit -c itrf:ant_y=5506838.5266271923 -m {} && psredit -c itrf:ant_z=2744934.9655897617 -m {} && psredit -c coord=17:13:49.5300+07:47:37.5000 -m {}" > psredit.txt
+ls -v  *.pazi | xargs -n1 -I{} echo "pdmp -dr 500 -ds 0.1 -pr 10000 -ps 10 -ar 100 -as 1  -g {}.ps/cps {}" > pdmp.txt
+ls *.ps | xargs -n1 -P10 -I{} convert -density 600 {} {}.jpg
+ls *.ps | xargs -n1 -P20 -I{} convert -density 600 -rotate 90 {} {}.jpg**
 ```
 ### parfile raw data folding for many pulsar
 ```
@@ -197,6 +211,19 @@ sudo podman run -it -v /home/data:/home/data -v /home/data22:/home/data22 --priv
 
 # mount the catalogue and enter the container (use sudo!)
 [chenyujie@localhost cyj]$ sudo podman exec -it -u chenyujie pulsars /bin/bash
+
+##-------------------------------------------------------------------------------------------------------------------------------------------------
+Docker
+Some things to try with docker
+docker images (shows images that you’ve downloaded)
+docker ps -a (shows all containers)
+docker stop ipta (stop your container) 
+docker rm ipta (remove your container) 
+docker run -v /path/to/local/dir:/home/jovyan/work/data
+docker run -it -v E:\Docker\data:/home/data -v E:\Docker\data1:/home/data1 -e DISPLAY=host.docker.internal:0.0 --name pulsar registry.cn-hangzhou.aliyuncs.com/pulsars/ubuntu22.04:latest
+docker exec -it -u jovyan ipta /bin/bash
+docker pull registry.cn-hangzhou.aliyuncs.com/pulsars/ubuntu22.04:latest
+git clone https://github.com/ipta/ipta-2018-workshop
 ```
 ### polarization calibration
 ```
