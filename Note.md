@@ -29,7 +29,7 @@ awk '/[0-9]:[0-9]/ {print $8"_DM"$2, $0}' cands.txt > Cands.txt
 find ./20250529*/*s/ -maxdepth 1 -name "*dat" | sort -V | xargs -n1 -P100 -I{} echo "single_pulse_search.py -b -m 300 {}"  >> single_pulse_search.txt
 ls -dv /root/sj-tmp/ydj/NGC6517_2025/*/*/bary_dat/ | xargs -n1 -I{} echo "cd {} && rffa -c /root/sj-tmp/ydj/SS+commands/FFA_pipeline_config_B.yml --log-timings  ./*DM*.inf "
 ```
-
+### parfile raw data folding for many pulsar
 ```
 #!/bin/bash
 
@@ -61,4 +61,29 @@ done
 #cat par_fitsfold.sh | parallel -j 40 --halt soon,fail=1
 #wait
 
+```
+
+### docker
+```
+*************************************************服务器配置*****************************************************************************************
+# centos and ubuntu ( under the root)
+[root@localhost chenyujie]# apt install podman  # ubuntu
+[root@localhost chenyujie]# yum install podman  # centos
+
+# buildah pull the images ( under the root)
+podman pull registry.cn-hangzhou.aliyuncs.com/pulsars/ubuntu22.04:v8.28  # created in 2025.8.28, include presto5.1, dspsr, psrchive et al.
+
+****************************************************************************************************************************************************
+# Verify the images exist ( use sudo!)
+[chenyujie@localhost cyj]$ sudo podman images
+REPOSITORY                                              TAG     IMAGE ID       CREATED        SIZE
+registry.cn-hangzhou.aliyuncs.com/pulsars/ubuntu22.04   v8.28   026e8dc2e432   45 hours ago   16.9 GB
+
+# created the container by the images (use sudo!)
+[chenyujie@localhost cyj]$ sudo podman run -it -v /home/data:/home/data --privileged --name pulsars 026e8dc2e432
+sudo podman run -it -v /home/data:/home/data -v /home/data22:/home/data22 --privileged --name pulsars_tjf 026e8dc2e432
+
+
+# mount the catalogue and enter the container (use sudo!)
+[chenyujie@localhost cyj]$ sudo podman exec -it -u chenyujie pulsars /bin/bash
 ```
