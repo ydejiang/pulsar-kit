@@ -42,6 +42,173 @@ ls -v  *.pazi| xargs -n1 -I{} echo "psredit -c itrf:ant_x=-1668557.2070983793 -m
 ls -v  *.pazi | xargs -n1 -I{} echo "pdmp -dr 500 -ds 0.1 -pr 10000 -ps 10 -ar 100 -as 1  -g {}.ps/cps {}" > pdmp.txt
 ls *.ps | xargs -n1 -P10 -I{} convert -density 600 {} {}.jpg
 ls *.ps | xargs -n1 -P20 -I{} convert -density 600 -rotate 90 {} {}.jpg**
+
+###---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+###---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+topo_bary.sh
+#!/bin/bash
+
+mkdir topo_inf
+cp *DM*.inf topo_inf
+
+sed -i 's/ J2000 Right Ascension (hh:mm:ss.ssss)  =  12:34:56.7890/ J2000 Right Ascension (hh:mm:ss.ssss)  =  18:01:50.5200/' *.inf
+sed -i 's/ J2000 Declination     (dd:mm:ss.ssss)  =  -12:34:56.7890/ J2000 Declination     (dd:mm:ss.ssss)  =  -08:57:31.6000/' *.inf
+sed -i 's/ Any breaks in the data? (1 yes, 0 no)  =  1/ Any breaks in the data? (1 yes, 0 no)  =  0/' *.inf
+
+#sed -i  '13,14d' *.inf
+for file in *.inf; do sed -i '/^ On/d' "$file"; done
+#sed -i '/On\/Off bin pair #/d' /home/data/dyf/NGC6517_day/prepdata/*.inf
+ls *.dat | xargs -n 1 -P 30 --replace prepdata {} -o {}_bary
+#ls *bary*.dat | xargs -n 1 --replace realfft -fwd -mem {}
+#ls *bary.fft | xargs -n 1 --replace accelsearch -zmax 20 -sigma 1.0 -numharm 32 -inmem -ncpus 4 {}
+
+###---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+###---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ACCEL_sift_prepfold_sub.sh
+#!/bin/bash
+
+#******************************
+
+#-------------------------------
+#- dj.yin at foxmail dot com   -
+#- Dejiang Yin, 2023-6-15      -   
+#-------------------------------
+
+# From ACCEL_sift.py to prepfold
+##
+# cp $PRESTO/examplescripts/ACCEL_sift.py .
+cd .. 
+python ACCEL_sift.py  > cands.txt
+#ACCEL_sift.py  > cands.txt
+
+##
+grep -E "_ACCEL_*:*" cands.txt | awk '{split($1, arr, ":"); print arr[1], arr[2], $2, $4, $8}' > Cands.txt
+file_values=""
+cand_values=""
+dm_values=""
+p_values=""
+
+while IFS= read -r line; do
+	file=$(echo "$line" | awk '{print $1}')
+	cand=$(echo "$line" | awk '{print $2}')
+        dm=$(echo "$line" | awk '{print $3}')
+	p=$(echo "$line" | awk '{print $5}')
+	file_values+="$file "
+	cand_values+="$cand "
+        dm_values+="$dm "
+	p_values+="$p "
+
+done < "Cands.txt"
+
+## 
+file_values=($file_values)
+cand_values=($cand_values)
+dm_values=($dm_values)
+p_values=($p_values)
+
+rm prepfold_sub_commands.sh
+
+for i in $(seq ${#file_values[*]}); do
+	#dat_name=$(echo "$file_values[i-1]" | awk -F"_ACCEL_" '{print $1}')
+        #echo "prepfold -noxwin -nosearch -topo -n 64 -npart 128 -accelcand ""${cand_values[i-1]}"" -accelfile ""${file_values[i-1]}.cand"" ""${dat_name}.dat"" " >> prepfold_dat_commands.sh
+	echo "prepfold -noxwin -nosearch -topo -n 64 -npart 128 -dm ""${dm_values[i-1]}"" -accelcand ""${cand_values[i-1]}"" -accelfile ""${file_values[i-1]}.cand"" -o ""Pms_${p_values[i-1]}_${file_values[i-1]}"" ./subbands/*.sub??? " >> prepfold_sub_commands.sh
+done
+
+## 
+cat prepfold_sub_commands.sh | parallel -j 5 --halt soon,fail=1
+wait
+
+## 
+#sh prepfold_dat_commands.sh
+
+rm -rf ./subbands/prepfold_sub
+mkdir ./subbands/prepfold_sub
+
+mv prepfold_sub_commands.sh ./subbands/prepfold_sub
+cp cands.txt  ./subbands/prepfold_sub
+cp Cands.txt ./subbands/prepfold_sub
+
+mv *.png   ./subbands/prepfold_sub
+
+rm -rf ./*.pfd
+rm -rf ./*.pfd.ps
+rm -rf ./*.pfd.bestprof
+###---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+###---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ACCEL_sift.bash
+#!/bin/bash
+#******************************
+#-------------------------------
+#- dj.yin at foxmail dot com   -
+#- Dejiang Yin, 2025-08-11     -   
+#-------------------------------
+# From ACCEL_sift.py to prepfold
+##
+# cp $PRESTO/examplescripts/ACCEL_sift.py .
+# cd .. 
+# python ACCEL_sift.py  > cands.txt
+python /path/to/accel/ACCEL_sift.py  > cands.txt
+
+##
+grep -E "_ACCEL_*:*" cands.txt | awk '{split($1, arr, ":"); print arr[1], arr[2], $2, $4, $8}' > Cands.txt
+file_values=""
+cand_values=""
+dm_values=""
+p_values=""
+
+while IFS= read -r line; do
+	file=$(echo "$line" | awk '{print $1}')
+	cand=$(echo "$line" | awk '{print $2}')
+        dm=$(echo "$line" | awk '{print $3}')
+	p=$(echo "$line" | awk '{print $5}')
+	file_values+="$file "
+	cand_values+="$cand "
+        dm_values+="$dm "
+	p_values+="$p "
+
+done < "Cands.txt"
+
+## 
+file_values=($file_values)
+cand_values=($cand_values)
+dm_values=($dm_values)
+p_values=($p_values)
+
+rm prepfold_sub_commands.sh
+
+for i in $(seq ${#file_values[*]}); do
+	#dat_name=$(echo "$file_values[i-1]" | awk -F"_ACCEL_" '{print $1}')
+    #echo "prepfold -noxwin -nosearch -topo -n 64 -npart 128 -accelcand ""${cand_values[i-1]}"" -accelfile ""${file_values[i-1]}.cand"" ""${dat_name}.dat"" " >> prepfold_dat_commands.sh
+	echo "prepfold -noxwin -nosearch -topo -n 64 -npart 128 -dm ""${dm_values[i-1]}"" -accelcand ""${cand_values[i-1]}"" -accelfile ""${file_values[i-1]}.cand"" -o ""Pms_${p_values[i-1]}_${file_values[i-1]}"" ./subbands/*.sub??? " >> prepfold_sub_commands.sh
+done
+
+## 
+cat prepfold_sub_commands.sh | xargs -n1 -I{} -P20 sh -c {}
+###---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+###---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FAST_hdu.py
+import fitsio 
+import os, sys
+
+# This python script is utilized to modify the header RA and Dec. information of fits file.
+
+# usage:
+# a single fits
+# python FAST_hdu.py filename.fits
+
+# multiple files of fits
+# ls *.fits | xargs -n 1 pyhton FAST_hdu.py
+# ls *.fits | xargs -n 1 --replace  pyhton FAST_hdu.py {}
+
+filename = sys.argv[1]
+
+hdulist = fitsio.FITS(filename, "rw")
+hdulist[0].write_key('RA', '18:01:50.52')   
+hdulist[0].write_key('DEC', '-08:57:31.6')
+
+hdulist.close()
+###---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+###---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ```
 ### parfile raw data folding for many pulsar
 ```
