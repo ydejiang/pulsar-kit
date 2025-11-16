@@ -69,6 +69,108 @@ done
 #wait
 
 ```
+### pulsar timing 
+```
+#parfile parameters of tempo2
+PSRJ           J1801-0857A
+RAJ             18:01:50.6080582         1  0.00010858853095316626   
+DECJ           -08:57:31.90352           1  0.00526733498607433405   
+F0             139.36088639769068735     1  0.00000000003156006786   
+F1             9.8998320889143702294e-15 1  7.2487936211934637038e-19
+PEPOCH         58871.058813851150013       
+POSEPOCH       58871.058843851150478       
+DMEPOCH        58871.05857                 
+DM             182.56000849188692717       
+START          58659.688811835754496       
+FINISH         59944.222690395683543      
+                                                               
+TZRMJD         59105.512449299703981     #The TZRMJD, TZRFRQ, and TZRSITE paramaters define phase 0.0 for the ephemeris.                                                           
+TZRFRQ         1000                      #Often, but NOT always, the fiducial point on the radio profile is the peak,
+TZRSITE        fast                      # but you must always ask the person who made the ephemeris to be sure, because other conventions are used!
+                                         # The fiducial point on the radio profile arrived at TZRSITE at frequency TZRFRQ at the moment TZRMJD. 
+
+
+TRES           24.395                    #Rms timing residual    
+
+EPHVER         5                         #(pam -h)--ephver ver     Ephem type for -E, 'ver' should be 'tempo' or 'tempo2' ;   
+                                         #* WARNING: If your PAR file comes from Tempo2 (usually you can tell by "EPHVER 5" in the file), then the default time system is TCB, NOT TDB!
+                                         # Tempo2 only uses TDB if there is "UNITS TDB" in the par file.       
+          
+NE_SW          10                        #The electron density at 1AU due to the solar wind  
+
+CLK            TT(TAI)                   #Terrestrial Time (TT) and International Atomic Time (TAI)?
+                                         # note: the tempo1 software switches off clock corrections in predictive mode. 
+                                         #To emulate this the CLK flag in the parameter file should be set to CLK UNCORR.
+
+MODE 1                                   # Fitting with errors MODE 1, or without MODE 0     
+                             
+UNITS          TCB                       # TDB - Barycentric Dynamic Time,  Barycentric Coordinate Time (TCB);
+
+TIMEEPH        IF99                      # Which time ephemeris to use (IF99/FB90)
+
+DILATEFREQ     Y                         # Whether or not to apply gravitational redshift and time dilation to observing frequency (Y/N)
+
+PLANET_SHAPIRO Y                         #In pulsar timing, massive bodies within the solar system cause a Shapiro delay for observed pulses. 
+
+T2CMETHOD      IAU2000B                  # Method for transforming from terrestrial to celestial frame (IAU2000B/TEMPO)
+
+CORRECT_TROPOSPHERE  Y                   #Whether or not to apply tropospheric delay corrections. 
+                                         #Troposphere is the atmospheric layer placed between earth's surface and an altitude of about 60 kilometres.
+
+EPHEM          DE200                     #Which solar system ephemeris to use，  DE200， DE405 , DE438, DE440；
+                                         #In order to correct the arrival time to the solar system's barycentre, tempo2 requires a solar system
+                                         #ephemeris. By default the JPL ephemeris DE200 is chosen.
+
+NITS           1                         #Number of iterations for the fitting routines
+
+NTOA           151
+CHI2R          1.6525 146
+
+#Some code examples, pulsar timing
+1. psrchive 
+pam -FTp --setnsub 8 -e FTp *.pfd (*.ar = DSPSR, prepfold = *.pfd)
+paas -iD standard.FTp 
+First click   --> center of the gaussian component; Second click  --> halfwidth of the gaussian component; Third click   --> height of the gaussian component; THEN press "F" to FIT!!!!, q is just for quit and save!
+pat -s paas.std -f tempo2 *.FTp  >  J.tim
+pat -s paas.std *.FTp  -f "tempo2 i" > J.tim
+
+2. tempo2
+tempo2 -gr transform tempo1_style.par tempo2_style.par 
+tempo2 -gr plk -f J.par J.tim 
+  
+3.presto and tmepo
+  
+# ls *.dat | xargs -n 1 --replace prepfold -noxwin -nosearch -topo -n 64 -npart 128 -par *.par {}
+# parallel -j 20 'prepfold -noxwin -nosearch -topo -n 64 -npart 128 -par *.par {}' ::: *.dat &
+
+#pfd_for_timing.py *.pfd
+(True is OK!)
+
+#pygaussfit.py name_standard.pfd.bestprof    
+(name_standard.gaussians)
+
+#for i in *.pfd; do get_TOAs.py -n 8 -g name_standard.gaussians ""${i}""; done
+#for i in *.pfd; do get_TOAs.py -n 4 -s 4 -g name_standard.gaussians ""${i}""; done
+#for i in *.pfd; do get_TOAs.py -n 4 -s 4 -2 -g name_standard.gaussians ""${i}""; done  #(-2, tempo2 format or style!)
+(source_name.tim)
+
+#tempo2 -gr transform tempo1_style.par tempo2_style.par #(from tempo1 to temop2 style)
+#tempo source_name.tim -f source_name.par; pyplotres.py
+
+## ---
+1. psrchive 
+pam -FTp --setnsub 8 -e FTp *.pfd (*.ar = DSPSR, prepfold = *.pfd)
+paas -iD standard.FTp 
+First click   --> center of the gaussian component; Second click  --> halfwidth of the gaussian component; Third click   --> height of the gaussian component; THEN press "F" to FIT!!!!, q is just for quit and save!
+pat -s paas.std -f tempo2 *.FTp  >  J.tim
+pat -s paas.std *.FTp  -f "tempo2 i" > J.tim
+
+2. tempo2
+tempo2 -gr transform tempo1.par tempo2.par 
+tempo2 -gr plk -f J.par J.tim 
+```
+
+
 
 ### docker
 ```
