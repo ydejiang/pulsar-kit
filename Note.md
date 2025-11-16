@@ -175,6 +175,7 @@ tempo2 -gr plk -f J.par J.tim
 
 ### docker
 ```
+@ Yujie Chen
 *************************************************服务器配置*****************************************************************************************
 # centos and ubuntu ( under the root)
 [root@localhost chenyujie]# apt install podman  # ubuntu
