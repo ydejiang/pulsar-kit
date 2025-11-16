@@ -5,15 +5,6 @@
 ls *.zst | xargs -n1 -P30 -I{} zstd --rm -d {}
 ls *.xz | xargs -n1 -I{} -P50 xz -d  {}
 ```
-
-### docker
-```
-docker ps -a
-docker start ab2c65b5c89b
-docker attach  ab2c65b5c89b
-docker exec -it --user ydj ab2c65b5c89b /bin/bash
-```
-
 ```
 for ((i = 1; i <= 100; i++)); do echo $i ; done
 
