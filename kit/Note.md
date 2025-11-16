@@ -12,6 +12,7 @@ for ((i = 1; i <= 100; i++)); do echo $i ; done
 files=$(ls /home/data/M92/20240101/*.fits | tail -n +210 | head -n 300)
 prepfold -topo -nosearch -noxwin -n 64 -npart 128 -dm 35.30 -accelcand 87 -accelfile M92_20240101_DM35.30_ACCEL_10.cand  -o ./M92_20240101_DM35.30_ACCEL_10.cand-210-510fits ${files}
 seq 1 1 1329 | xargs -n1 -P5 -I{} prepfold -nosearch -noxwin -topo -n 64 -accelcand {} -accelfile M15_20201221_DM66.95_red_ACCEL_600.cand M15_20201221_DM66.95_red.dat
+ls  *.dat | xargs -n 1 -P 20 --replace prepfold -noxwin -nosearch -topo -n 64 -npart 128 -par *.par {}
 
 find . -maxdepth 1 -name "*.fft" | sort -V
 find . -maxdepth 1 -name "*_red.fft" | sort -V 
@@ -421,6 +422,7 @@ du -sh /path/to/folder; ls; lsblk; df -h; ll -h; vim; cat; head; tail; scp; top;
 Ctrl+z, Ctrl+c, Ctrl+d; rm -rf /path/file; mv; cp; mkdir -p; tar; cp; ssh;
 ssh soft:`WinSCP, Xshell, Xming, Xftp`
 
+sudo vim /etc/sudoers
 sudo mkdir -p /mnt/sdu 
 sudo mount /dev/sdu /mnt/sdu 
 mount /dev/sdd /home/data1
