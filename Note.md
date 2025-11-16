@@ -29,3 +29,36 @@ awk '/[0-9]:[0-9]/ {print $8"_DM"$2, $0}' cands.txt > Cands.txt
 find ./20250529*/*s/ -maxdepth 1 -name "*dat" | sort -V | xargs -n1 -P100 -I{} echo "single_pulse_search.py -b -m 300 {}"  >> single_pulse_search.txt
 ls -dv /root/sj-tmp/ydj/NGC6517_2025/*/*/bary_dat/ | xargs -n1 -I{} echo "cd {} && rffa -c /root/sj-tmp/ydj/SS+commands/FFA_pipeline_config_B.yml --log-timings  ./*DM*.inf "
 ```
+
+```
+#!/bin/bash
+
+# Obs_data=(20250529 20250520 20250505 20250428 20250420 20250416 20250412)   #changs obs data
+# File_path=/data31/DDT2024_11/NGC6517
+
+# Obs_data=(20250126 20241126 20240926)   #changs obs data
+# File_path=/data31/PT2024_0080/NGC6517
+
+# Obs_data=(20240306 20240206 20240102 20230929)   #changs obs data
+# File_path=/data31/PT2023_0012/NGC6517
+
+# Obs_data=(20221231 20221228)   #changs obs data
+# File_path=/data31/PT2022_0087/NGC6517
+
+Obs_data=(20220430)   #changs obs data
+File_path=/data31/PT2021_0105/NGC6517
+
+Source_list=(A B C D E F G H I K L M N O P Q R S T U V)
+# rm par_fitsfold.sh
+for i in $(seq ${#Source_list[*]}); do
+	for j in $(seq ${#Obs_data[*]}); do
+		file_path=""${File_path}""/""${Obs_data[j-1]}""
+		#echo "prepfold -nosearch -noxwin -topo -n 64 -npart 128 -nsub 128 -par J*""${Source_list[i-1]}""*.par -o ""${Obs_data[j-1]}""_""${Source_name}${Source_list[i-1]}""_fitsfold  -mask *""${Source_name}""*""${Obs_data[j-1]}""*.mask ""${File_Path}/*.fits""  "  >>  par_fitsfold.sh
+                echo "prepfold -nosearch -noxwin -topo -n 64 -npart 128 -nsub 128 -par ./parfile-0/J1801-0857""${Source_list[i-1]}""*.par -o ""${Obs_data[j-1]}_NGC6517${Source_list[i-1]}"" ""${file_path}/NGC6517*M01*.fits""  "  >>  par_fitsfold.sh
+	done
+done
+
+#cat par_fitsfold.sh | parallel -j 40 --halt soon,fail=1
+#wait
+
+```
