@@ -182,10 +182,60 @@ pat -s paas.std *.FTp  -f "tempo2 i" > J.tim
 
 2. tempo2
 tempo2 -gr transform tempo1.par tempo2.par 
-tempo2 -gr plk -f J.par J.tim 
+tempo2 -gr plk -f J.par J.tim
+
+###---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+###---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1：脉冲星计时钟差文件说明
+1、更新TEMPO、TEMPO2的钟差文件：
+git clone https://github.com/ipta/pulsar-clock-corrections.git
+上述命令下载后、替换本地对应的目录下的钟差文件（对应目录没有FAST的clk文件，直接加进去即可），这样的话就只需要在TEMPO，TEMPO2更新最新的time_fast.dat、fast2gps.clk即可。
+
+2、FAST钟差文件下载地址：
+https://github.com/NAOC-pulsar/FAST_ClockFile/tree/master
+https://github.com/ipta
+
+3、TEMPO钟差文件、需要将/tempo/clock/目录内、下述三个文件更新：
+time.dat
+time_fast.dat
+ut1.dat
+其中要在time.dat中添加 INCLUDE time_fast.dat 到该文件的末尾，方能成功调用。
+
+4、TEMPO2的则是在/tempo2/T2runtime/clock/目录下更新，其他该目录下的文件也最好用最新的版本，这样，钟文件MJD可以覆盖TOA：
+fast2gps.clk
+ut1.dat
+在TEMPO2里边更新FAST台站位置：/tempo2/T2runtime/observatory/observatories.dat
+# FAST
+#-1666460.00    5499910.00       2759950.00       FAST                fast
+-1668557.0    5506838.0       2744934.0          FAST                fast
+TEMPO内的FAST位置目前是对的。
+
+5、下面是未作修改前的TEMPO2的钟文件警告
+Warning #2: [CLK3] no clock corrections available for clock UTC(fast) for MJD 58397.3
+TEMPO未作ut1.dat更新前的警告：
+*** Warning - MJD = 59126 outside UT1 table range (41689-58894)
+ *** Warning - Further UT1 messages suppressed
+TEMPO未作钟差文件修正的警告：
+ Clk corr error: TOA at 58454.19275 greater than last clk file entry for nsite  20
+ *** Additional clock-correction messages suppressed. ***
+
+6、TEMPO2:  CLK            TT(TAI) 
+      TEMPO:  CLK                 TT(BIPM2021) / 
+TEMPO的CLK选项
+CLK     Terrestrial time standard  
+        Allowed values: 'UNCORR' (default), 'UTC(NIST)', 'UTC(BIPM)', 
+                       'TT(BIPM)', 'PTB', 'AT1'
+
+7、TEMPO2其他修正：
+[tempo2Util.C:397] [TROP2] Assume standard atmospheric pressure (no data) for site fast at MJD 58397.3
+[tempo2Util.C:397] [TROP1] Assume zero zenith wet delay (no data) for site fast  at MJD 58397.3
+L-band的影响可忽略。
+
+20251104：
+#tempo：如果上述问题都解决了，还是没有正确调用clk。那么检查钟差文件的格式，如小数点，参数列间隔的空格数<第1，2列需要7个空格，第二列三个小数点： 0.000>。
+
+在vim time_fast.dat，使用``:%s/0.0/0.000/g’’全局替换
 ```
-
-
 
 ### docker
 ```
