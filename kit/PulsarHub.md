@@ -175,10 +175,9 @@
       <details><summary><code>ionFR</code></summary>https://github.com/csobey/ionFR</details>
     </td>
     <td>
-      <details><summary><code>ProPlot</code></summary>https://proplot.readthedocs.io/en/stable/index.html</details>
+      <details><summary><code>Matplotlib</code></summary>https://matplotlib.org/<br>https://www.color-hex.com/<br>https://www.cncolor.cn/cncolor<br>https://www.cncolor.cn/jingdianpeise<br>https://www.webdesignrankings.com/resources/lolcolors/<br>https://github.com/garrettj403/SciencePlots<br><br>ProPlot:https://proplot.readthedocs.io/en/stable/index.html<br>Pylustrator:https://github.com/rgerum/pylustrator</details>
     </td>
     <td>
-      <details><summary><code>Matplotlib</code></summary>https://matplotlib.org/<br>https://www.color-hex.com/<br>https://www.cncolor.cn/cncolor<br>https://www.cncolor.cn/jingdianpeise<br>https://www.webdesignrankings.com/resources/lolcolors/<br>https://github.com/garrettj403/SciencePlots</details>
     </td>
   </tr>
   <tr>
