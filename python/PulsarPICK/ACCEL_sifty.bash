@@ -1,0 +1,126 @@
+#!/bin/bash
+#-------------------------------
+#- dj.yin at foxmail dot com   -
+#- Dejiang Yin, 2024-12-30      -   
+#-------------------------------
+
+# Number of parallel processes for xargs (default 100)
+P=45
+# Suffix for .cand files (e.g., set by acceleration or jerk search)
+zmax=_ACCEL_20
+# zmax=_ACCEL_300_JERK_900  # Uncomment for jerk searches
+
+# Path to Python scripts
+code_path=/root/sj-tmp/ydj/M13/siftcode
+
+# Define Python script paths
+python_1=""${code_path}""/ACCEL_sifty.py
+python_2=""${code_path}""/combine_plots.py
+python_3=""${code_path}""/second_sifting.py
+
+# Step 1: Run the first-stage sifting pipeline (disabled by default)
+python ""${python_1}"" -ACCEL 320 -minP 2. -maxP 10.8 -rDM 3 -minS 1 -maxS 40 -cpu ${P}
+# For jerk search:
+#python ""${python_1}"" -ACCEL 300 -JERK 900 -minP 2. -maxP 10.8 -rDM 4 -minS 6 -maxS 40 -cpu ${P}
+
+# Step 2: Generate prepfold commands using parallel Python script
+python3 <<EOF
+import glob
+from multiprocessing import Pool
+import os
+
+# Locate the input files dynamically
+dm_file = glob.glob('./ACCEL/*ACCEL-DM.txt')[0]
+cand_file = glob.glob('./ACCEL/*ACCEL-accelcand.txt')[0]
+pms_file = glob.glob('./ACCEL/*ACCEL-Pms.txt')[0]
+
+# Read DM, candidate number, and spin period (Pms)
+with open(dm_file) as f:
+    dms = f.read().split()
+with open(cand_file) as f:
+    cands = f.read().split()
+with open(pms_file) as f:
+    pms = ["%.4f" % float(x) for x in f.read().split()]
+
+zmax = "${zmax}"
+
+# Function to generate prepfold command
+def generate_command(i):
+    try:
+        dm = dms[i]
+        cand = cands[i]
+        pms_i = pms[i]
+        datfile = glob.glob(f"*{dm}*.dat")[0]
+        return f"prepfold -noxwin -nosearch -n 64 -npart 128 -accelcand {cand} -accelfile *{dm}*{zmax}.cand -o Pms{pms_i}-{datfile} {datfile}"
+    except Exception:
+        return None
+
+with Pool(${P}) as p:
+    cmds = p.map(generate_command, range(len(dms)))
+cmds = [cmd for cmd in cmds if cmd]
+with open("commands_1.sh", "w") as f:
+    f.write("\n".join(cmds) + "\n")
+EOF
+
+# Step 3: Execute the prepfold commands in parallel
+cat commands_1.sh | xargs -n 1 -P "${P}" -I {} sh -c "{}"
+wait
+
+# Step 4: Generate image-merging Python commands
+python3 <<EOF
+import glob
+from multiprocessing import Pool
+import os
+
+# Read DM and candidate lists
+dm_file = glob.glob('./ACCEL/*ACCEL-DM.txt')[0]
+cand_file = glob.glob('./ACCEL/*ACCEL-accelcand.txt')[0]
+with open(dm_file) as f:
+    dms = f.read().split()
+with open(cand_file) as f:
+    cands = f.read().split()
+
+python_2 = "${python_2}"
+os.makedirs("./ACCEL/DmSigmaFig", exist_ok=True)
+
+# Function to generate image merge command
+def generate_merge_command(i):
+    try:
+        dm = dms[i]
+        cand = cands[i]
+        fig1 = glob.glob(f"*{dm}*_Cand_{cand}.pfd.png")[0]
+        fig2 = f"./ACCEL/DmSigmaFig/{dm}_Cand_{cand}.png"
+        return f"python {python_2} {fig1} {fig2} -output {fig1}"
+    except Exception:
+        return None
+
+with Pool(${P}) as pool:
+    commands = pool.map(generate_merge_command, range(len(dms)))
+commands = [cmd for cmd in commands if cmd]
+with open("commands_2.sh", "w") as f:
+    f.write("\n".join(commands) + "\n")
+EOF
+
+# Step 5: Merge profile and DM–sigma plots in parallel
+cat commands_2.sh | xargs -n 1 -P "${P}" -I {} sh -c "{}"
+wait
+
+# Step 6: Move result files to final folders
+mv commands* ./ACCEL/
+# Step 6: Move result files to final folders (robust to large number of files)
+find . -maxdepth 1 -name "*.png" -exec mv -t ./ACCEL/ACCEL_fig {} +
+find . -maxdepth 1 -name "*.pfd.bestprof" -exec mv -t ./ACCEL/ACCEL_fig {} +
+find . -maxdepth 1 -name "*.pfd" -type f -delete
+find . -maxdepth 1 -name "*.pfd.ps" -type f -delete
+
+cand=`cat ./ACCEL/*ACCEL-accelcand.txt`
+Cand=($cand)
+# Step 7: Run second sifting stage (based on merged figures)
+cd ./ACCEL/ACCEL_fig
+python "${python_3}"
+
+echo ""The numbers of candidate: ${#Cand[*]}""
+
+# Step 8: Print summary
+echo "[INFO] All steps completed."
+date
