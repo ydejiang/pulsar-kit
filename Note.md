@@ -198,3 +198,151 @@ sudo podman run -it -v /home/data:/home/data -v /home/data22:/home/data22 --priv
 # mount the catalogue and enter the container (use sudo!)
 [chenyujie@localhost cyj]$ sudo podman exec -it -u chenyujie pulsars /bin/bash
 ```
+### polarization calibration
+```
+@ Tong Liu
+0.准备工作
+
+>>> psrcat -E [星名] > [命名].par
+# 获得已知脉冲星的星历，在atnf查找星名
+
+>>> readfile [.fits文件]
+# 查看fits头文件 关注time per file
+
+1.dspsr信号折叠
+
+>>> dspsr -b 128 -L 60 -A -t 16 -E [.par文件] -O [输出名] [.fits文件]
+# -c 用已知周期来折叠 没有par文件时使用
+# -cont 输入fits文件为连续
+# -K remove inter-channel dispersion delays
+# -D 7.3 override dispersion measure 单脉冲使用
+# -nsub 10 output archives with n integrations each
+
+>>> pam -f 16 -e f16 [.ar文件]
+# 把4096个通道数除以16
+# 得到.f16文件
+# 经过这一步之后再pazi
+
+>>> psradd -e ar -o [输出名] [输入文件]
+# 输入文件用空格隔开
+# -e 改变扩展名 如果前一步没有f16则不需要
+
+>>> pav -DFTp -g [M13A.png]/PNG [.ar文件]
+# ar文件转png
+
+>>> pazi [.ar文件]
+# 交互式rfi处理
+# 按u - undo
+
+2.处理噪声
+
+>>> dspsr -b 1024 -L 60 -A -t 16 -c 0.201326592 -O [输出名] [.fits文件]
+# 折叠噪声文件
+# -b 1024, 2048 给bin数量
+# -c 0.100663296
+# -t 16线程
+
+>>> pav -DFTp -g [noise.png]/PNG [.ar文件]
+# ar文件转png
+
+>>> psredit -c type=PolnCal -m [噪声文件.ar]
+# 修改头文件为偏振校准文件
+
+>>> pam -f 16 -e f16 [.ar文件]
+# 非必需 但有时候需要这一步再pazi
+
+>>> pazi [.ar文件]
+# 交互式rfi处理
+
+>>> cp [噪声文件.ar] noise.mv
+# 如果有pazi 则输入为pazi
+
+3.其他图像查看
+
+>>> psrzap [.ar文件]
+# 查看折叠后图像 信息更多
+
+>>> pacv [噪声文件.ar]
+# 生成比较小的图像并查看 推荐
+# 输出格式选/PS或/PNG都可
+# 或者输入.pazi文件
+# 如果不成功 执行前面psredit再试一下
+
+4.偏振校准
+
+>>> pac -U -n q -w -u [mv或pazi]
+# -U关闭望远镜旋转修正
+# -w生成database.txt 记录标准文件一些基本信息
+# -q 把q的符号反过来 因为数据里写错了
+# -u write to file extensions recognized in search
+
+>>> pac -T -U -c -Z -n q -d database.txt -e ac [脉冲星文件.ar]
+# 用标准文件修正脉冲星文件 开始校准
+# -e extension added to output filenames
+# -T take closest time
+# -c take closest sky coordinates
+# -Z do not try to match instruments 
+# 生成acP文件
+
+>>> pav -FTSC -g [M13A.png]/PNG [校准文件.acP]
+# 生成新的图像文件 
+
+5.其他
+
+>>> paz -J paz.psh -e zap [M13A.ar] 
+# 自动消干扰 需要已经折叠出ar
+# -J -e固定参数 不太需要改
+# paz.psh文件内容如下
+
+#! /usr/bin/env psrsh
+
+# zap 1000:1050
+zap median window=24
+zap median  cutoff=3
+zap median exp={$all:max-$all:min}
+zap median
+zap mow robust
+zap mow window=0.1
+zap mow cutoff=4.0
+zap mow
+
+>>> pdmp -dr [185.65] -ds [0.05] -pr 0.00071756144 -b test [.ar文件]
+# 在一个范围内折
+
+叠最佳信号
+
+psredit -c type=PolnCal -m J1402+13_20230514_off.zap
+
+mv J1402+13_20230514_off.zap J1402+13_20230514_off.mv
+
+pac -U -n q -w -u mv
+
+pac -d database.txt -T -c -Z -U -n q J1402+13_20230514.zap 
+
+
+$(ls /home/data/C1/20240929/*.fits | tail -n +1 | head -n 10)
+
+C1 as an example!
+
+# 0.100663296 for 0.1s noise, 1.00663296 for 1s noise 
+# 0.201326592 for 0.2s noise, 2.01326592 for 2s nise
+
+dspsr -b 256 -L 30 -A -t 16 -c 1.00663296 -O C1_noise $(ls /home/data/C1/20240929/*.fits | tail -n +1 | head -n 9)
+dspsr -b 256 -L 30 -A -t 16 -E J2338+4818_best_1.par -O C1 $(ls /home/data/C1/20240929/*.fits | tail -n +1 | head -n 109)
+
+psredit -c type=PolnCal -m C1_noise.ar
+pazi C1.ar
+pazi C1_noise.ar
+# pacv C1_noise.ar
+mv C1_noise.ar.pazi C1_noise.ar.pazi.cal
+pac -U -n q -w -u cal
+cat database.txt
+pac -d database.txt -T -c -Z -U -n q C1.ar.pazi
+
+pav -C -SFT --publnc -g C1.ps/cps C1.ar.calibP
+pav -z 0.3,0.7 -C -SFT --publnc -g C1.ps/cps C1.ar.calibP
+
+ls *.ps | xargs -n1 -P20 -I{} convert -density 600 -rotate 90 {} {}.jpg
+
+RM拟合, 校准完后就能直接RM拟合了, 不过这个流程的拟合结果是星际介质的贡献加大气层的贡献值,ionFR,github就能找到,去除大气层贡献值
+```
