@@ -2,6 +2,7 @@
 
 ### data reduction
 ```
+Linux:
 ls *.zst | xargs -n1 -P30 -I{} zstd --rm -d {}
 ls *.xz | xargs -n1 -I{} -P50 xz -d  {}
 ```
@@ -413,4 +414,26 @@ pav -z 0.3,0.7 -C -SFT --publnc -g C1.ps/cps C1.ar.calibP
 ls *.ps | xargs -n1 -P20 -I{} convert -density 600 -rotate 90 {} {}.jpg
 
 RM拟合, 校准完后就能直接RM拟合了, 不过这个流程的拟合结果是星际介质的贡献加大气层的贡献值,ionFR,github就能找到,去除大气层贡献值
+```
+### Linux and shell
+```
+du -sh /path/to/folder; ls; lsblk; df -h; ll -h; vim; cat; head; tail; scp; top; pgrep; pwd; cd -; xargs; grep; awk; wc -l; find; kill PID; mount, umount, yum install, apt install
+Ctrl+z, Ctrl+c, Ctrl+d; rm -rf /path/file; mv; cp; mkdir -p; tar; cp; ssh;
+ssh soft:`WinSCP, Xshell, Xming, Xftp`
+
+sudo mkdir -p /mnt/sdu 
+sudo mount /dev/sdu /mnt/sdu 
+mount /dev/sdd /home/data1
+
+Symbolic Link
+ln -s /path/to/file.txt /path2/to/file2.txt
+ln -s /path1 /path2
+
+常用screen参数
+screen -S yourname -> 新建一个叫yourname的session
+screen -ls -> 列出当前所有的session
+screen -r yourname -> 回到yourname这个session
+screen -d yourname -> 远程detach某个session
+screen -d -r yourname -> 结束当前session并回到yourname这个session
+
 ```
