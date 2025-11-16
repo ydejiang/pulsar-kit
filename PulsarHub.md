@@ -1,4 +1,5 @@
-##### Here are several links related to pulsars.
+## Here are several links related to pulsars.
+##
 ### Pulsar catalog
 
 <table>
