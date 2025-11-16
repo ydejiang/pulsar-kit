@@ -29,6 +29,12 @@ awk '/[0-9]:[0-9]/ {print $8"_DM"$2, $0}' cands.txt > Cands.txt
 
 find ./20250529*/*s/ -maxdepth 1 -name "*dat" | sort -V | xargs -n1 -P100 -I{} echo "single_pulse_search.py -b -m 300 {}"  >> single_pulse_search.txt
 ls -dv /root/sj-tmp/ydj/NGC6517_2025/*/*/bary_dat/ | xargs -n1 -I{} echo "cd {} && rffa -c /root/sj-tmp/ydj/SS+commands/FFA_pipeline_config_B.yml --log-timings  ./*DM*.inf "
+
+# 6517
+prepsubband -nobary -nsub 128 -subdm 182.50 -sub -mask ../NGC6517_20200123_rfifind.mask -o NGC6517_20200123 ""${File_Path}""/*.fits
+prepsubband -nobary -nsub 128 -subdm 182.50 -sub -mask ../*.mask -o NGC6517_20200120 ${a}
+prepfold -nosearch -noxwin -topo -dm 182.00 -n 256 -npart 256  -accelcand 6 -accelfile NGC6517_20191017_DM182.00_ACCEL_0.cand ./subbands/NGC6517_20191017_DM182.00.sub???
+
 ```
 ### parfile raw data folding for many pulsar
 ```
