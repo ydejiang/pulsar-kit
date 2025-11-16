@@ -4,4 +4,4 @@
 3. `FAST_tracking.py`; this script calculates and plots the altitude tracks (also tracking time) of celestial sources observed by the Five-hundred-meter Aperture Spherical radio Telescope ([FAST](https://fast.bao.ac.cn/)) for a given date and specified source(s).
 4. `PulsarHub.md`; a catalog of several pulsar catalogs.
 5. `Note.md`; a personal note.
-6. `candidate.py` and `dmiter.py` are used in FFA search package [riptide](https://github.com/v-morello/riptide)for generating candidate plots and ignoring optimal DM step plan.
+6. `candidate.py` and `dmiter.py` are used in FFA search package [riptide](https://github.com/v-morello/riptide) for generating customized candidate plots and ignoring optimal DM step plan.
