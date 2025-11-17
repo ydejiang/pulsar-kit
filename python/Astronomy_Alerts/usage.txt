@@ -1,0 +1,96 @@
+#### 使用说明
+
+1.这个脚本用于定期将以下两个网站发布或发送的消息汇总，并转发到指定的邮箱地址：
+
+The Astronomer's Telegram：https://www.astronomerstelegram.org/
+
+GCN: NASA's Time-Domain and Multimessenger Alert System：https://gcn.nasa.gov/
+
+2.由于网络限制，通过爬虫获取最新消息并不方便；因此，订阅网站的即时预警邮件并将其转发到指定邮箱是最简便的方法。
+
+3.在国内的邮箱服务中，QQ 邮箱最容易实现此功能。其他邮箱经过多次测试仍无法稳定使用（甚至不能远程修改邮箱内邮件？？），因此放弃。
+
+4.使用脚本前，请设置邮箱的收发规则：将来自 ATel 的邮件放入文件夹 “Atel”，来自 GCN 的邮件放入文件夹 “GCN”（均在“我的文件夹”下新建）。请务必检查邮箱中对应文件夹的实际 IMAP 路径，示例如下：
+
+#IMAP Folder Names (from mail.list())
+ATEL_FOLDER = "&UXZO1mWHTvZZOQ-/ATel" # ATel 文件夹
+GCN_FOLDER = "&UXZO1mWHTvZZOQ-/GCN" # GCN 文件夹
+不同邮箱的文件夹名称及编码可能不同，请以实际情况为准。
+
+5.开通邮箱的 IMAP、SMTP 服务，并获取登录所需的授权码。
+
+6. python ATel_GCN_QQemail.py -h, 查看脚本运行的格式：
+usage: ATel_GCN_QQemail.py [-h] [--atel-hours ATEL_HOURS]
+                           [--gcn-hours GCN_HOURS] [--email EMAIL]
+                           [--password PASSWORD] [--target TARGET]
+
+ATel and GCN Circular Email Aggregator - Fetches recent astronomy alerts and
+sends consolidated report
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --atel-hours ATEL_HOURS
+                        Hours to look back for ATel emails [default: 25]
+  --gcn-hours GCN_HOURS
+                        Hours to look back for GCN emails [default: 25]
+  --email EMAIL         QQ email account for fetching emails [default:
+                        atel_gcn@qq.com]
+  --password PASSWORD   QQ email authorization code [default: script default]
+  --target TARGET       Target email address(es), comma-separated for multiple
+                        [default: same as sender]
+
+如上所示，邮箱地址和授权码可以通过命令行参数指定和修改源代码来实现，这里的示例，我已经删除/替换掉真实的邮箱地址和授权码，请使用真实的,可以执行的地址和授权码。
+
+7.可将该脚本放入能访问网络的设备（服务器？）上，通过crontab来管理定期汇总发送到指定邮箱，比如每24小时执行一次,每天下午三点半执行：
+
+30 15 * * * /home/yindejiang/anaconda3/bin/python3 /home/yindejiang/ATel_GCN_QQemail.py --target email_1.@qq.com,email_2.@qq.com,email_2.@demo.edu.com > /dev/null 2>&1
+
+可以通过下面两个命令编辑和查看任务：
+crontab -e
+crontab -l
+
+8.上述执行之后，许多人的邮箱会在每天三点半收到一个汇总的预警消息，如下：
+
+邮箱主题：ATel #17498-17494 & GCN #42715-42691
+正文：
+Astronomy Alerts Posted within the last 24 hours (17 Nov 2025; 12:45 UT):
+
+The Astronomer's Telegram:
+#17498. The blazar 3C345 flare - the strongest one since August 2006 [https://www.astronomerstelegram.org/?read=17498]
+#17497. Fermi-LAT detection of renewed gamma-ray activity from the FSRQ 3C 345 [https://www.astronomerstelegram.org/?read=17497]
+#17496. Photometric Follow-up of the Quasar 3C 138 [https://www.astronomerstelegram.org/?read=17496]
+#17495. Follow up monitoring of the fragmentation of comet C/2025 K1 (ATLAS) [https://www.astronomerstelegram.org/?read=17495]
+#17494. X-flaring active region at the solar western limb: possible SEPs event [https://www.astronomerstelegram.org/?read=17494]
+
+GCN Circulars:
+#42715. GRB 251116D: AstroSat CZTI detection [https://gcn.nasa.gov/circulars/42715]
+#42714. LIGO/Virgo/KAGRA S251112cm: EP-FXT follow-up observations [https://gcn.nasa.gov/circulars/42714]
+#42713. The EP-WXT trigger 01709247588: more evidence of flaring star from Mondy optical observations [https://gcn.nasa.gov/circulars/42713]
+#42712. GRB 251116C: SVOM/VT optical upperlimit [https://gcn.nasa.gov/circulars/42712]
+#42711. GRB 251025B: further Mondy optical observations [https://gcn.nasa.gov/circulars/42711]
+#42710. GRB 251111A: Mondy optical upper limit [https://gcn.nasa.gov/circulars/42710]
+#42709. GRB 251116B: EP-FXT follow-up observation [https://gcn.nasa.gov/circulars/42709]
+#42708. LIGO/Virgo/KAGRA S251116en: Identification of a GW compact binary merger candidate [https://gcn.nasa.gov/circulars/42708]
+#42707. LIGO/Virgo/KAGRA S251112cm: Observations with the NSF-DOE Vera C. Rubin Observatory [https://gcn.nasa.gov/circulars/42707]
+#42706. GRB 251116B: LCO optical upper limits [https://gcn.nasa.gov/circulars/42706]
+#42705. GRB 251116C: LCO optical upper limits [https://gcn.nasa.gov/circulars/42705]
+#42704. SVOM GRB251116.66: Global MASTER-Net observations report [https://gcn.nasa.gov/circulars/42704]
+#42703. GRB 251116C: SVOM detection of a burst [https://gcn.nasa.gov/circulars/42703]
+#42702. GRB 251116B: SVOM detection of a burst [https://gcn.nasa.gov/circulars/42702]
+#42701. IceCube-Cascade 251112A: Upper limits from a search for additional neutrino events in IceCube [https://gcn.nasa.gov/circulars/42701]
+#42700. GRB 251116A: Fermi GBM Final Real-time Localization [https://gcn.nasa.gov/circulars/42700]
+#42699. LIGO/Virgo/KAGRA S251112cm: GRANDMA observations of the skymap [https://gcn.nasa.gov/circulars/42699]
+#42698. LIGO/Virgo/KAGRA S251112cm: AT2025adht follow-up at Maidanak observatory by GRANDMA [https://gcn.nasa.gov/circulars/42698]
+#42697. GRB 251115A: Tiled Swift observations [https://gcn.nasa.gov/circulars/42697]
+#42696. GRB 251115A: Fermi-LAT detection [https://gcn.nasa.gov/circulars/42696]
+#42695. GRB 251013C: joint SVOM/ECLAIRs-GRM refined analysis [https://gcn.nasa.gov/circulars/42695]
+#42694. Fermi GRB 251115A: Global MASTER-Net observations report [https://gcn.nasa.gov/circulars/42694]
+#42693. LIGO/Virgo/KAGRA S251112cm: NED Galaxies in the 4-Update Localization Volume [https://gcn.nasa.gov/circulars/42693]
+#42692. GRB 251115A: Fermi GBM Final Real-time Localization [https://gcn.nasa.gov/circulars/42692]
+#42691. LIGO/Virgo/KAGRA S251112cm: DECam GW-MMADS candidates [https://gcn.nasa.gov/circulars/42691]
+
+9.目前的格式是，序号+标题+网址，如需其他格式，编辑源代码。
+10. 可以注册一个新的qq邮箱地址完成上述。
+
+
+@ Dejiang Yin, 20251117
