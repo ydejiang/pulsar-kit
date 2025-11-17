@@ -1,5 +1,4 @@
-### pulsar-kit
-A toolkit for pulsar hunters.
+### A toolkit for pulsar hunters.
 <table>
   <tr>
     <td>
