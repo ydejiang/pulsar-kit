@@ -9,9 +9,9 @@
         4. <code>PulsarHub.md</code>; a catalog of several pulsar catalogs.<br>
         5. <code>Note.md</code>; a personal note.<br>
         6. <code>candidate.py</code> and <code>dmiter.py</code> are used in FFA search package <code>riptide</code> (https://github.com/v-morello/riptide) for generating customized candidate plots and ignoring optimal DM step plan.<br>
-        7. <code>PulsarPICK</code>, a simple pipeline adapted from PRESTO's <code>ACCEL_sift.py</code> for processing <code>accelsearch</code> results. It also generates user-friendly candidate diagnostic plots by combining the standard time-series folding plot with a trial-DM versus detection-significance curve, where real pulsars typically show a bell-shaped peak around the optimal DM.
-      </details><br>
-      ...
+        7. <code>PulsarPICK</code>, a simple pipeline adapted from PRESTO's <code>ACCEL_sift.py</code> for processing <code>accelsearch</code> results. It also generates user-friendly candidate diagnostic plots by combining the standard time-series folding plot with a trial-DM versus detection-significance curve, where real pulsars typically show a bell-shaped peak around the optimal DM.<br>
+        ...
+      </details>
     </td>
   </tr>
 </table>
