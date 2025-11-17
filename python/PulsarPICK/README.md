@@ -1,7 +1,7 @@
 # PulsarPICK
-PulsarPICK is the short for Pulsar Candidate Sifting and Synthesis Pipeline. This scripts are designed for the ”accelsearch“ results files from PulsaR Exploration and Search TOolkit (PRESTO).
+PulsarPICK is designed for the `accelsearch` results files from the `PulsaR Exploration and Search TOolkit (PRESTO)`.
 These scripts are written based on python and shell！
-You just need to copy PCSSP_sift.py and PCSP _ sift.sh to your directory of "\*ACCEL\*0" files from accelsearch search of PRESTO and run PCSSP_sift.sh!
+You just need to copy PCSSP_sift.py and PCSSP _ sift.sh to your directory of "\*ACCEL\*0" files from accelsearch search of PRESTO and run PCSSP_sift.sh!
 That is, on your terminal:
 ```
 bash PCSSP_sift.sh
