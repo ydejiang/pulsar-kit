@@ -15,6 +15,7 @@ GCN: NASA's Time-Domain and Multimessenger Alert System：https://gcn.nasa.gov/
 #IMAP Folder Names (from mail.list())
 ATEL_FOLDER = "&UXZO1mWHTvZZOQ-/ATel" # ATel 文件夹
 GCN_FOLDER = "&UXZO1mWHTvZZOQ-/GCN" # GCN 文件夹
+
 不同邮箱的文件夹名称及编码可能不同，请以实际情况为准。
 
 5.开通邮箱的 IMAP、SMTP 服务，并获取登录所需的授权码。
@@ -46,6 +47,7 @@ optional arguments:
 30 15 * * * /home/yindejiang/anaconda3/bin/python3 /home/yindejiang/ATel_GCN_QQemail.py --target email_1.@qq.com,email_2.@qq.com,email_2.@demo.edu.com > /dev/null 2>&1
 
 可以通过下面两个命令编辑和查看任务：
+
 crontab -e
 crontab -l
 
@@ -90,7 +92,9 @@ GCN Circulars:
 #42691. LIGO/Virgo/KAGRA S251112cm: DECam GW-MMADS candidates [https://gcn.nasa.gov/circulars/42691]
 
 9.目前的格式是，序号+标题+网址，如需其他格式，编辑源代码。
+
 10. 可以注册一个新的qq邮箱地址完成上述。
+
 
 
 @ Dejiang Yin, 20251117
