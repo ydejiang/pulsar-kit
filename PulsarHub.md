@@ -288,6 +288,9 @@
     <td>
     <details><summary><code>Anna’s Archive</code></summary>https://zh.annas-archive.li/<br>https://zh.annas-archive.org/<br>https://zh.annas-archive.se/<br>https://tw.annas-archive.org/<br><br>https://zh.annas-archive.org/blog/<br>https://en.wikipedia.org/wiki/Anna%27s_Archive<br>https://software.annas-archive.li/AnnaArchivist/annas-archive</details>
     </td>
+      <td>
+    <details><summary><code>Zotero</code></summary>https://www.zotero.org/<https://zotero-chinese.com/><br><br>https://www.jianguoyun.com/<https://help.jianguoyun.com/?p=3168></details>
+    </td>
   </tr>
 </table>
 
