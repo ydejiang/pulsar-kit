@@ -285,7 +285,9 @@
     </td>
     <td>
       <details><summary><code>Z-Library</code></summary>https://zh.z-library.sk/<br>https://z-lib.id/</details>
-    <td></td>
+    <td>
+    <details><summary><code>Anna’s Archive</code></summary>annas-archive.li<br>https://zh.annas-archive.org/<br>https://zh.annas-archive.se/<br>https://tw.annas-archive.org/<br><br>https://zh.annas-archive.org/blog/<br>https://en.wikipedia.org/wiki/Anna%27s_Archive</details>
+    </td>
   </tr>
 </table>
 
