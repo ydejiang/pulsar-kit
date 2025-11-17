@@ -4,8 +4,12 @@ A toolkit for pulsar hunters.
   <tr>
     <td>
       <details><summary><code>update log</code></summary>
-        1. <code>residuals_plot.py</code>; this code generates publication-quality pulsar timing residual plots from [TEMPO](https://tempo.sourceforge.net/tempo_idx.html) resid2.tmp files.<br>
-        2. <code>ACCEL_sift.py</code>; a modified version of [PRESTO](https://www.cv.nrao.edu/~sransom/presto/) toolkit’s original script, allowing users to run the sifting routine directly with command-line input parameters for more flexible and convenient use.
+        1. <code>residuals_plot.py</code>; this code generates publication-quality pulsar timing residual plots from <code>TEMPO</code> (https://tempo.sourceforge.net/tempo_idx.html) resid2.tmp files.<br>
+        2. <code>ACCEL_sift.py</code>; a modified version of <code>PRESTO</code> (https://www.cv.nrao.edu/~sransom/presto/) toolkit’s original script, allowing users to run the sifting routine directly with command-line input parameters for more flexible and convenient use.<br>
+        3. <code>FAST_tracking.py</code>; this script calculates and plots the altitude tracks (also tracking time) of celestial sources observed by the Five-hundred-meter Aperture Spherical radio Telescope (<code>FAST</code>, https://fast.bao.ac.cn/) for a given date and specified source(s).<br>
+        4. <code>PulsarHub.md</code>; a catalog of several pulsar catalogs.<br>
+        5. <code>Note.md</code>; a personal note.
+        6. <code>candidate.py</code> and <code>dmiter.py</code> are used in FFA search package <code>riptide</code> (https://github.com/v-morello/riptide) for generating customized candidate plots and ignoring optimal DM step plan.
       </details>
     </td>
   </tr>
