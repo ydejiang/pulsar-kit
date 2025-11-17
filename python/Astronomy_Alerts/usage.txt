@@ -35,7 +35,7 @@ optional arguments:
   --gcn-hours GCN_HOURS
                         Hours to look back for GCN emails [default: 25]
   --email EMAIL         QQ email account for fetching emails [default:
-                        atel_gcn@qq.com]
+                        20251117demo@qq.com]
   --password PASSWORD   QQ email authorization code [default: script default]
   --target TARGET       Target email address(es), comma-separated for multiple
                         [default: same as sender]
