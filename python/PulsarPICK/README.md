@@ -6,8 +6,12 @@ First, set the corresponding file paths and candidate sifting criteria, then exe
 That is, in your terminal:
 ```
 bash ACCEL_sift.bash
+
 bash /path/to/code/ACCEL_sift.bash
+
 or
+
 bash PCSSP_sift.bash
+
 bash /path/to/code/PCSSP_sift.bash
 ```
