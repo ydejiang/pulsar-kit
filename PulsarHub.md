@@ -115,7 +115,7 @@
       <details><summary><code>TempoNest</code></summary>https://github.com/LindleyLentati/TempoNest</details>
     </td>
     <td>
-    <details><summary><code>pulsar-clock-corrections</code></summary>https://github.com/ipta/pulsar-clock-corrections<br>https://ipta.github.io/pulsar-clock-corrections/<br>https://github.com/NAOC-pulsar/FAST_ClockFile</details>
+    <details><summary><code>pulsar-clock-corrections</code></summary>https://github.com/ipta/pulsar-clock-corrections<br>https://ipta.github.io/pulsar-clock-corrections/<br>https://github.com/NAOC-pulsar/FAST_ClockFile<br><br>https://ipta-catchup-2022.netlify.app/pdfs/IPTA%202022%20clock%20corrections%20poster%20-%20Anne%20Archibald.pdf</details>
     </td>
     <td>
     <details><summary><code>Astronomical Times</code></summary>https://lweb.cfa.harvard.edu/~jzhao/times.html</details>
