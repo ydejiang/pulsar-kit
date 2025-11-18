@@ -206,7 +206,7 @@
      <details><summary><code>Workshop at nwu</code></summary>https://nwupulsar2023.github.io/index.html</details>
     </td>
     <td>
-       <details><summary><code>binpulsars</code></summary>https://www.spaceacademy.net.au/env/star/bnp/.htm</details>
+       <details><summary><code>binpulsars</code></summary>https://www.spaceacademy.net.au/env/star/bnp/binpulsars.htm</details>
     </td>
       <td>
        <details><summary><code>NANOGrav</code></summary>https://github.com/nanograv</details>
