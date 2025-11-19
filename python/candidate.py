@@ -1,6 +1,5 @@
 import logging
 from collections import namedtuple
-
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
@@ -9,10 +8,7 @@ from astropy.time import Time
 # from datetime import datetime
 import textwrap
 
-
-
 log = logging.getLogger('riptide.candidate')
-
 
 class Candidate(object):
     """
@@ -104,8 +100,9 @@ class Candidate(object):
     def from_dict(cls, items):
         """ De-serialize from dictionary """
         return cls(items['params'], items['tsmeta'], items['peaks'], items['subints'])
+    #def plot(self, figsize=(18, 4.5), dpi=80):  # modify by Dejiang
+    def plot(self, figsize=(16, 11), dpi=160):
 
-    def plot(self, figsize=(18, 12), dpi=160):
         """
         Create a plot of the candidate
 
@@ -167,6 +164,9 @@ class TableEntry(TableEntryBase):
         plt.text(X[1], y, fmt.format(self.value), ha='right', **kwargs)
         plt.text(X[2], y, self.unit, **kwargs)
 
+################################################################################################
+################################################################################################
+## original code
 '''
 def plot_table(params, tsmeta):
     """
@@ -218,7 +218,94 @@ def plot_table(params, tsmeta):
                direction='in', length=8, width=1.5,
                labelsize=12)
 
+def plot_dm_curve(dm, snr):
+    dm_min = dm.min()
+    dm_max = dm.max()
+    plt.plot(dm, snr, color="r", marker="o", markersize=3)
+
+    # Avoid matplotlib warning when calling xlim() with two equal values
+    if dm_min == dm_max:
+        plt.xlim(dm_min - 0.5, dm_min + 0.5)
+    else:
+        plt.xlim(dm_min, dm_max)
+    plt.grid(linestyle=":")
+    plt.xlabel("DM (pc cm$^{-3}$)")
+    plt.ylabel("Best S/N")
+
+
+def plot_subints(X, T):
+    """
+    X : ndarray
+        Sub-integrations array, shape = (nsubs, nbins)
+    T : float
+        Integration time in seconds
+    """
+    __, nbins = X.shape
+
+    X = np.hstack((X, X[:, : nbins // 2]))
+    __, nbins_ext = X.shape
+
+    plt.imshow(
+        X,
+        cmap="Greys",
+        interpolation="nearest",
+        aspect="auto",
+        extent=[-0.5, nbins_ext - 0.5, T, 0],  # Note: t = 0 is at the top of the plot
+    )
+    plt.fill_between([nbins, nbins_ext], [0, 0], [T, T], color="b", alpha=0.08)
+    plt.xlim(-0.5, nbins_ext - 0.5)
+    plt.ylabel("Time (seconds)")
+    plt.title("1.5 Periods of Signal")
+
+
+def plot_profile(P):
+    """
+    P : profile normalised to unit background noise variance
+    """
+    nbins = len(P)
+    P = np.concatenate((P, P[: nbins // 2]))
+    nbins_ext = len(P)
+
+    plt.bar(range(nbins_ext), P - np.median(P), width=1, color="#404040")
+
+    ymin, ymax = plt.ylim()
+    plt.fill_between(
+        [nbins, nbins_ext], [ymin, ymin], [ymax, ymax], color="b", alpha=0.08
+    )
+    plt.ylim(ymin, ymax)
+
+    plt.xlim(-0.5, nbins_ext - 0.5)
+    plt.xlabel("Phase bin")
+    plt.ylabel("Normalised amplitude")
+
+
+def plot_candidate(cand):
+    """
+    Plot candidate on the current figure
+    """
+    # https://matplotlib.org/tutorials/intermediate/gridspec.html
+    nrows, ncols = 2, 7
+    gs = GridSpec(nrows, ncols, figure=plt.gcf())
+
+    plt.subplot(gs[:1, 2:])
+    plot_subints(cand.subints, cand.tsmeta["tobs"])
+
+    plt.subplot(gs[1:, 2:])
+    plot_profile(cand.profile)
+
+    plt.subplot(gs[:1, :2])
+    plot_table(cand.params, cand.tsmeta)
+
+    plt.subplot(gs[1:, :2])
+    plot_dm_curve(*cand.dm_curve)
+
+    plt.tight_layout()
+
 '''
+
+################################################################################################
+################################################################################################
+## modify by Dejiang Yin
 
 def plot_table(params, tsmeta):
     """
@@ -232,12 +319,10 @@ def plot_table(params, tsmeta):
     coord = tsmeta['skycoord']
     ra_hms = coord.ra.to_string(unit=uu.hour, sep=':', precision=2, pad=True)
     dec_hms = coord.dec.to_string(unit=uu.deg, sep=':', precision=2, pad=True)
-
     # Convert observation time from MJD to UTC
     obsdate = Time(tsmeta['mjd'], format='mjd', scale='utc', precision=0)
-
     # Add centered title
-    title_text = "riptide: Finding pulsars with the Fast Folding Algorithm (FFA)"
+    title_text = "riptide: Finding pulsars with the Fast Folding Algorithm"
     plt.text(
         x=0.5, 
         y=0.97, 
@@ -248,26 +333,12 @@ def plot_table(params, tsmeta):
         fontsize=20,
         fontweight='bold'
     )
-
-
    # --------------------------
     # Column-specific titles
     # --------------------------
-    # Left column title: "Search information"
+    # Left column title: "Observation information"
     plt.text(
-        x=0.20,  # Center of left column (between 0.05 and 0.35)
-        y=0.89, 
-        s="Search information", 
-        ha='center', 
-        va='top', 
-        family='monospace', 
-        fontsize=20,
-        fontweight='bold'
-    )
-
-    # Right column title: "Observation information"
-    plt.text(
-        x=0.75,  # Center of right column (between 0.55 and 0.85)
+        x=0.25,  # Center of left column (between 0.05 and 0.35)
         y=0.89, 
         s="Observation information", 
         ha='center', 
@@ -276,21 +347,22 @@ def plot_table(params, tsmeta):
         fontsize=20,
         fontweight='bold'
     )
-    # Right column title: "Observation information"
-#    ax = plt.gca()
-#    ax.text(
-#        x=0.275,  # Center of right column (between 0.55 and 0.85)
-#        y=0.12,
-#        s="Basename: "+tsmeta['basename'],
-#        ha='center',
-#        va='top',
-#        family='monospace',
-#        fontsize=20,
-#    )
+
+    # Right column title: "Search information"
+    plt.text(
+        x=0.75,  # Center of right column (between 0.55 and 0.85)
+        y=0.89, 
+        s="Search information", 
+        ha='center', 
+        va='top', 
+        family='monospace', 
+        fontsize=20,
+        fontweight='bold'
+    )
     ax = plt.gca()  # Get the current axes object (the subplot being worked on)
     # Basename text: Left-aligned + Auto-wrap for long text + Fixed Y-height
     basename = tsmeta['basename']
-    wrapped_text = textwrap.fill(f"File: {basename}", width=60)
+    wrapped_text = textwrap.fill(f"File: {basename}", width=57)
     
     ax.text(
     x=0.02,               # Left-alignment starting point: 5% to the right of the subplot's left edge
@@ -312,11 +384,11 @@ def plot_table(params, tsmeta):
     current_time = Time.now()
     time_str = current_time.isot.split('.')[0] + ' UTC'
     ax.text(
-        x=0.98, y=0.02,
+        x=0.915, y=0.17,
         s=f'@: {time_str}',
         transform=ax.transAxes,  
         ha='right', va='bottom',
-        fontsize=22,
+        fontsize=20,
     )
     # --------------------------
     # Define entries with ALL required parameters (including 'unit' as per original definition)
@@ -324,59 +396,7 @@ def plot_table(params, tsmeta):
     # Left column: Core physical parameters
     left_entries = [
         # TableEntry requires: name, value, formatter, unit (original signature)
-        TableEntry(
-            name='Period', 
-            value=params['period'] * 1000.0,  # Keep numeric value (not formatted string)
-            formatter='.6f',  # Format specifier for numeric value
-            unit='ms'  # Unit as separate parameter (critical for original class)
-        ),
-        TableEntry(
-            name='DM', 
-            value=params['dm'], 
-            formatter='.2f', 
-            unit='pc cm$^{-3}$'
-        ),
-        TableEntry(
-            name='Width', 
-            value=params['width'], 
-            formatter='d', 
-            unit='bins'
-        ),
-        TableEntry(
-            name='Duty cycle', 
-            value=params['ducy'] * 100.0, 
-            formatter='.2f', 
-            unit='%'
-        ),
-        TableEntry(
-            name='S/N', 
-            value=params['snr'], 
-            formatter='.1f', 
-            unit=''  # Empty string for no unit (but still required)
-        ),
-        TableEntry(
-            name='Tobs',
-            value=tsmeta['tobs'],
-            formatter='.2f',
-            unit='s'
-        ),
-        TableEntry(
-            name='Barycentered',
-            value=tsmeta['barycentered'],
-            formatter='',
-            unit=''
-        ),
-         TableEntry(
-            name='Analyst',
-            value=tsmeta['analyst'],
-            formatter='s',
-            unit=''
-        ),
-    ]
-
-    # Right column: Source info & observation time
-    right_entries = [
-        TableEntry(
+      TableEntry(
             name='Source', 
             value=tsmeta['source_name'], 
             formatter='s', 
@@ -401,17 +421,17 @@ def plot_table(params, tsmeta):
             unit=''
         ),
         TableEntry(
-            name='UTC', 
-            value=obsdate.iso, 
+            name='Date', 
+            value=obsdate.strftime('%Y-%m-%d'), 
             formatter='s', 
             unit=''
         ),
-        TableEntry(
-            name='Observer', 
-            value=tsmeta['observer'], 
-            formatter='s', 
-            unit=''
-        ),
+#        TableEntry(
+#            name='Observer', 
+#            value=tsmeta['observer'], 
+#            formatter='s', 
+#            unit=''
+#        ),
         TableEntry(
             name='Telescope',
             value=tsmeta['telescope'],
@@ -424,14 +444,66 @@ def plot_table(params, tsmeta):
             formatter='s',
             unit=''
         ),
+         TableEntry(
+            name='Analyst',
+            value=tsmeta['analyst'],
+            formatter='s',
+            unit=''
+        ),
+    ]
 
+    # Right column: Source info & observation time
+    right_entries = [
+ 
+        TableEntry(
+            name='Period (ms)', 
+            value=params['period'] * 1000.0,  # Keep numeric value (not formatted string)
+            formatter='.6f',  # Format specifier for numeric value
+            unit=''  # Unit as separate parameter (critical for original class)
+        ),
+        TableEntry(
+            name='DM (pc cm$^{-3}$)', 
+            value=params['dm'], 
+            formatter='.2f', 
+            unit=''
+        ),
+        TableEntry(
+            name='Width (bins)', 
+            value=params['width'], 
+            formatter='d', 
+            unit=''
+        ),
+        TableEntry(
+            name='Duty cycle (%)', 
+            value=params['ducy'] * 100.0, 
+            formatter='.2f', 
+            unit=''
+        ),
+        TableEntry(
+            name='S/N', 
+            value=params['snr'], 
+            formatter='.2f', 
+            unit=''  # Empty string for no unit (but still required)
+        ),
+        TableEntry(
+            name='Tobs (s)',
+            value=tsmeta['tobs'],
+            formatter='.2f',
+            unit=''
+        ),
+        TableEntry(
+            name='Barycentered',
+            value=tsmeta['barycentered'],
+            formatter='',
+            unit=''
+        ),
     ]
 
     # Layout parameters (adjusted for title)
     y0 = 0.78  # Lowered to make space for title
     dy = 0.086   # Row spacing
-    left_X = [0.02, 0.35, 0.370]  # Original 3-column X coordinates (name, value, unit)
-    right_X = [0.55, 0.96, 0.98]  # Right column uses same 3-column structure
+    left_X = [0.02, 0.46, 0.49]  # Original 3-column X coordinates (name, value, unit)
+    right_X = [0.52, 0.97, 0.99]  # Right column uses same 3-column structure
 
     # Plot left column
     for row_idx, entry in enumerate(left_entries):
@@ -465,20 +537,17 @@ def plot_table(params, tsmeta):
                direction='in', length=8, width=1.5,
                labelsize=12)
 
-
-
 def plot_dm_curve(dm, snr):
     dm_min = dm.min()
     dm_max = dm.max()
     #plt.plot(dm, snr, color='r', marker='o', markersize=3)
-    plt.plot(dm, snr, marker='o', markersize=10, linewidth=4)
-
+    #plt.plot(dm, snr, marker='o', markersize=8, color='black', linestyle='--', linewidth=2)
+    plt.plot(dm, snr, marker='o', markersize=12, color='black', linewidth=2., markeredgecolor='black',markerfacecolor='none', markeredgewidth=2.0)
     max_snr_idx = snr.argmax()
     max_dm = dm[max_snr_idx]
     max_snr = snr[max_snr_idx]
-    plt.plot(max_dm, max_snr, 
-             marker='*', markersize=20, color='b', 
-             linestyle='none', zorder=5)
+    plt.axvline(x=max_dm, color='black', linestyle='--', linewidth=2.2,
+                label='optimal S/N')
 
     # Avoid matplotlib warning when calling xlim() with two equal values 
     if dm_min == dm_max:
@@ -491,6 +560,7 @@ def plot_dm_curve(dm, snr):
     plt.ylabel("Best S/N", fontsize=16)
     plt.tick_params(axis='both', which='major', labelsize=18)
     plt.tick_params(axis='y', labelrotation=90)
+    plt.legend(loc='best',fontsize=20)
     #ax = plt.gca()
     #ax.set_xticks([])
     ax = plt.gca()
@@ -498,11 +568,6 @@ def plot_dm_curve(dm, snr):
                direction='in', length=8, width=1.5,
                labelsize=12)
 
-
-
-
-
-'''
 def plot_subints(X, T):
     """
     X : ndarray
@@ -510,131 +575,74 @@ def plot_subints(X, T):
     T : float
         Integration time in seconds
     """
-    __, nbins = X.shape
+    nsubs, nbins = X.shape  # Get number of sub-integrations and phase bins
+    # --------------------------
+    # Core: Local normalization (each sub-integration scaled to 0~1 independently)
+    # --------------------------
+    X_norm = np.zeros_like(X, dtype=np.float32)
+    for i in range(nsubs):
+        sub_data = X[i, :]
+        min_val = np.min(sub_data)
+        max_val = np.max(sub_data)
+        if np.isclose(min_val, max_val, atol=1e-7):
+            X_norm[i, :] = 0.0  # Set flat data (no fluctuation) to 0
+        else:
+            X_norm[i, :] = (sub_data - min_val) / (max_val - min_val)  # Normalize to 0~1 range
 
-    X = np.hstack((X, X[:, :nbins//2 *2]))
-    __, nbins_ext = X.shape
-
+    # Extend phase to two periods
+    X_norm = np.hstack((X_norm, X_norm[:, :nbins//2 * 2]))
+    _, nbins_ext = X_norm.shape
+    # Define extent in phase (0~2) and time (0~T) units
+    extent = [0, 2, 0, T]
+    # Use reversed grayscale (white→black gradient, stronger signals appear darker, matching Presto style)
     plt.imshow(
-        X, 
-        #cmap='Greys', interpolation='nearest', aspect='auto',
-        cmap='viridis', interpolation='nearest', aspect='auto',
-        extent=[-0.5, nbins_ext-0.5, 0, T] # Note: t = 0 is at the top of the plot
-        )
-    plt.fill_between([nbins, nbins_ext], [0, 0], [T, T], color='b', alpha=0.08)
-    plt.xlim(-0.5, nbins_ext-0.5)
-    plt.ylabel("Time (seconds)", fontsize=16)
-    plt.xlabel("Phase Bin (2 Periods of Signal)", fontsize=16)
-    #plt.title("1.5 Periods of Signal")
-    plt.tick_params(axis='both', which='major', labelsize=12)
-    plt.tick_params(axis='y', labelrotation=90)
-
-    ax = plt.gca()
-    ax.tick_params(axis='both', which='major',
-               direction='in', length=8, width=1.5,
-               labelsize=12)
-'''
-def plot_subints(X, T):
-    """
-    X : ndarray
-        Sub-integrations array, shape = (nsubs, nbins)
-    T : float
-        Integration time in seconds
-    """
-    __, nbins = X.shape
-
-    # Extend X to two periods
-    X = np.hstack((X, X[:, :nbins//2 * 2]))
-    __, nbins_ext = X.shape
-
-    # Define extent in phase units: 0–2 instead of bin index
-    extent = [0, 2, 0, T]   # x from 0 to 2 phases, y from 0 to T seconds
-
-    plt.imshow(
-        X,
-        cmap='viridis', interpolation='nearest', aspect='auto',
+        X_norm,
+        cmap='gray_r',  # Replace viridis with reversed grayscale to mimic Presto's white-black gradient
+        interpolation='nearest',
+        aspect='auto',
         extent=extent,
-        origin='upper'  # so t=0 is at the top
+        origin='upper'  # So t=0 is at the top
     )
-
-    # Fill region beyond the first full period (1.0–2.0)
-    plt.fill_between([1, 2], [0, 0], [T, T], color='b', alpha=0.08)
-
+    # Highlight the second period region (1.0–2.0)
+    plt.fill_between([1, 2], [0, 0], [T, T], color='b', alpha=0.04)
+    # Axis settings
     plt.xlim(0, 2)
     plt.ylabel("Time (seconds)", fontsize=16)
     plt.xlabel("Pulse Phase (2 Periods)", fontsize=16)
     plt.tick_params(axis='y', labelrotation=90)
-
-    # Only show ticks at 0.0, 0.5, 1.0,1.5 2.0
+    # Phase axis ticks
     plt.xticks([0.0, 0.5, 1.0, 1.5, 2.0], fontsize=12)
     plt.yticks(fontsize=12)
-
+    # Tick style
     ax = plt.gca()
-    ax.tick_params(axis='both', which='major',
-                   direction='in', length=8, width=1.5,
-                   labelsize=12)
-
-'''
-def plot_profile(P):
-    """
-    P : profile normalised to unit background noise variance
-    """
-    nbins = len(P)
-    P = np.concatenate((P, P[:nbins//2 *2]))
-    nbins_ext = len(P)
-
-    #plt.bar(range(nbins_ext), P - np.median(P), width=1, color='#404040')
-    #plt.bar(range(nbins_ext), P - np.median(P), width=1)
-    plt.plot(range(nbins_ext), P - np.median(P), color='#1f77b4', lw=2.2)
-
-    ymin, ymax = plt.ylim()
-    plt.fill_between([nbins, nbins_ext], [ymin, ymin], [ymax, ymax], color='b', alpha=0.08)
-    plt.ylim(ymin, ymax)
-
-    plt.xlim(-0.5, nbins_ext-0.5)
-    # plt.xlabel("Phase bin")
-    # plt.ylabel("Normalised amplitude")
-    plt.ylabel("Flux (Arb. Units)", fontsize=16)
-    #plt.title("1.5 Periods of Signal")
-    plt.tick_params(axis='both', which='major', labelsize=18)
-
-    ax = plt.gca()
-    #ax.set_xticks([])
-    ax.set_xticklabels([])
-    #ax.set_yticklabels([])
-    plt.tick_params(axis='y', labelrotation=90)
-    ax = plt.gca()
-    ax.tick_params(axis='both', which='major',
-               direction='in', length=8, width=1.5,
-               labelsize=12)
-
-'''
+    ax.tick_params(
+        axis='both',
+        which='major',
+        direction='in',
+        length=8,
+        width=1.5,
+        labelsize=12
+    )
 
 def plot_profile(P):
     """
     P : profile normalised to unit background noise variance
     """
     nbins = len(P)
-
     # Extend profile to 2 periods
     P = np.concatenate((P, P[:nbins//2 * 2]))
     nbins_ext = len(P)
-
     # Convert bin index to phase (0–2)
     phase = np.linspace(0, 2, nbins_ext, endpoint=False)
-
     # Plot profile
-    plt.plot(phase, P - np.median(P), color='#1f77b4', lw=2.2)
-
+    plt.plot(phase, P - np.median(P), color='black', lw=2.)
     ymin, ymax = plt.ylim()
     # Fill the second period region (1.0–2.0)
-    plt.fill_between([1, 2], [ymin, ymin], [ymax, ymax], color='b', alpha=0.08)
+    plt.fill_between([1, 2], [ymin, ymin], [ymax, ymax], color='b', alpha=0.04)
     plt.ylim(ymin, ymax)
-
     # Axis limits
     plt.xlim(0, 2)
     plt.ylabel("Flux (Arb. Units)", fontsize=16)
-
     # Set tick positions but hide labels
     ax = plt.gca()
     ax.set_xticks([0.0, 0.5, 1.0, 1.5, 2.0])
@@ -648,81 +656,21 @@ def plot_profile(P):
                    direction='in', length=8, width=1.5,
                    labelsize=12)
 
-
-'''
 def plot_candidate(cand):
     """
     Plot candidate on the current figure
     """
     # https://matplotlib.org/tutorials/intermediate/gridspec.html
-    nrows, ncols = 2, 7
+    nrows, ncols = 18, 14
     gs = GridSpec(nrows, ncols, figure=plt.gcf())
-
-    plt.subplot(gs[:1, 2:])
-    plot_subints(cand.subints, cand.tsmeta['tobs'])
-
-    plt.subplot(gs[1:, 2:])
-    plot_profile(cand.profile)
-
-    plt.subplot(gs[:1, :2])
-    plot_table(cand.params, cand.tsmeta)
-
-    plt.subplot(gs[1:, :2])
-    plot_dm_curve(*cand.dm_curve)
-
-    plt.tight_layout()
-
-'''
-
-'''
-
-def plot_candidate(cand):
-    """
-    Plot candidate on the current figure
-    """
-    # https://matplotlib.org/tutorials/intermediate/gridspec.html
-    nrows, ncols = 2, 7
-    gs = GridSpec(nrows, ncols, figure=plt.gcf())
-
-    #plt.subplot(gs[:1, 2:])
-    plt.subplot(gs[1:, 2:])
-    plot_subints(cand.subints, cand.tsmeta['tobs'])
-
-    #plt.subplot(gs[1:, 2:])
-    plt.subplot(gs[:1, 2:])
-    plot_profile(cand.profile)
-
-    plt.subplot(gs[:1, :2])
-    plot_table(cand.params, cand.tsmeta)
-
-    plt.subplot(gs[1:, :2])
-    plot_dm_curve(*cand.dm_curve)
-
-    plt.tight_layout()
-
-'''
-
-
-def plot_candidate(cand):
-    """
-    Plot candidate on the current figure
-    """
-    # https://matplotlib.org/tutorials/intermediate/gridspec.html
-    nrows, ncols = 16, 12
-    gs = GridSpec(nrows, ncols, figure=plt.gcf())
-
     plt.subplot(gs[4:, :4])
     plot_subints(cand.subints, cand.tsmeta['tobs'])
-
     plt.subplot(gs[:4, :4])
     plot_profile(cand.profile)
-
     plt.subplot(gs[:10, 4:])
     plot_table(cand.params, cand.tsmeta)
-
     plt.subplot(gs[10:, 4:])
     plot_dm_curve(*cand.dm_curve)
-
     plt.tight_layout()
 
 
