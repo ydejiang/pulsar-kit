@@ -1,0 +1,21 @@
+# 如何服务器找到riptide的candidate.py
+1，通过which rffa
+# 先备份脚本
+cp /usr/local/bin/rffa /usr/local/bin/rffa.bak
+# 编辑脚本，在 import 下方添加打印代码
+vim /usr/local/bin/rffa
+import sys
+print("Python 模块搜索路径：", sys.path)  # 新增这行
+import re
+import sys
+from riptide.pipeline.pipeline import main
+# ... 其余内容不变
+
+执行脚本查看输出：
+rffa
+从 sys.path 中找到 riptide 模块所在的目录。例如，若 sys.path 包含 /opt/riptide，则 riptide 模块的根目录可能是 /opt/riptide（因为 Python 会在该目录下寻找 riptide/ 子目录作为模块）。
+也可以直接通过 Python 交互式命令查询 riptide 模块的位置：
+# 进入脚本使用的 Python 环境（即 /usr/local/bin/python3.10）
+/usr/local/bin/python3.10
+
+find /usr/local/lib/python3.10/site-packages/riptide -name "candidate.py"
