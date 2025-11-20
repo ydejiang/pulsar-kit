@@ -8,7 +8,6 @@ from astropy.time import Time
 # from datetime import datetime
 import textwrap
 import matplotlib.ticker as ticker 
-import os
 
 log = logging.getLogger('riptide.candidate')
 
