@@ -139,8 +139,7 @@ class Candidate(object):
         fig = self.plot(**kwargs)
         # fig.savefig(fname)
         fig.savefig(fname, bbox_inches="tight", pad_inches=0.15)
-        # .pdf
-        name, _ = os.path.splitext(fname); pdf_fname = f"{name}.pdf"; fig.savefig(pdf_fname, bbox_inches="tight", pad_inches=0.15) 
+        name, _ = os.path.splitext(fname); pdf_fname = f"{name}.pdf"; fig.savefig(pdf_fname, bbox_inches="tight", pad_inches=0.15)
         plt.close(fig)
 
     def __str__(self):
@@ -333,9 +332,9 @@ def plot_table(params, tsmeta):
         s=title_text, 
         ha='center', 
         va='top', 
-        family='monospace', 
-        fontsize=20,
-        fontweight='bold'
+        #family='cursive', 
+        fontsize=24,
+        #fontweight='bold'
     )
    # --------------------------
     # Column-specific titles
@@ -347,9 +346,9 @@ def plot_table(params, tsmeta):
         s="Observation information", 
         ha='center', 
         va='top', 
-        family='monospace', 
+        #family='fantasy', 
         fontsize=20,
-        fontweight='bold'
+        #fontweight='bold'
     )
 
     # Right column title: "Search information"
@@ -359,9 +358,9 @@ def plot_table(params, tsmeta):
         s="Search information", 
         ha='center', 
         va='top', 
-        family='monospace', 
+        #family='monospace', 
         fontsize=20,
-        fontweight='bold'
+        #fontweight='bold'
     )
     ax = plt.gca()  # Get the current axes object (the subplot being worked on)
     # Basename text: Left-aligned + Auto-wrap for long text + Fixed Y-height
@@ -568,8 +567,10 @@ def plot_dm_curve(dm, snr):
     #ax.set_xticks([])
     ax = plt.gca()
     ax.tick_params(axis='both', which='major',
-               direction='in', length=8, width=1.5,
+               direction='in', length=6, width=1.5,
                labelsize=14)
+    ax.tick_params(axis='x', top=True, labeltop=False)
+    ax.tick_params(axis='y', right=True, labelright=False) 
 
 def plot_subints(X, T):
     """
@@ -616,7 +617,7 @@ def plot_subints(X, T):
     # Phase axis ticks
     plt.xticks([0.0, 0.5, 1.0, 1.5, 2.0], fontsize=14)
     ax = plt.gca()
-    ax.xaxis.set_minor_locator(ticker.AutoMinorLocator())
+    #ax.xaxis.set_minor_locator(ticker.AutoMinorLocator())
     #ax.yaxis.set_minor_locator(ticker.AutoMinorLocator())
     # Tick style
     ax = plt.gca()
@@ -624,11 +625,13 @@ def plot_subints(X, T):
         axis='both',
         which='major',
         direction='in',
-        length=8,
+        length=6,
         width=1.5,
         labelsize=14
     )
-    ax.tick_params(axis='both', which='minor', direction='in', length=6,width=1.5,labelsize=12)
+    #ax.tick_params(axis='both', which='minor', direction='in', length=6,width=1.5,labelsize=12)
+    ax.tick_params(axis='x', top=True, labeltop=False) 
+    ax.tick_params(axis='y', right=True, labelright=False)
 
 def plot_profile(P):
     """
@@ -653,7 +656,7 @@ def plot_profile(P):
     # Set tick positions but hide labels
     ax = plt.gca()
     ax.set_xticks([0.0, 0.5, 1.0, 1.5, 2.0])
-    ax.xaxis.set_minor_locator(ticker.AutoMinorLocator())
+    #ax.xaxis.set_minor_locator(ticker.AutoMinorLocator())
     #ax.yaxis.set_minor_locator(ticker.AutoMinorLocator())
     ax.set_xticklabels([])   # <-- hide numbers
     #ax.set_xticks([])
@@ -661,15 +664,14 @@ def plot_profile(P):
     #ax.set_yticklabels([])
     plt.tick_params(axis='y', labelrotation=90)
     # Beautify ticks
-    ax.tick_params(axis='x', which='major',
-                   direction='inout', length=12, width=1.5,
-                   labelsize=14)
-    ax.tick_params(axis='x', which='minor',
-                   direction='inout', length=6, width=1.5,
-                   labelsize=12)
     ax.tick_params(axis='y', which='major',
-                   direction='in', length=8, width=1.5,
+                   direction='in', length=6, width=1.5,
                    labelsize=14)
+    ax.tick_params(axis='y', right=True, labelright=False, which='major')
+    ax.tick_params(axis='x', top=True, which='major',
+                   direction='in', length=6, width=1.5,
+                   labelsize=14)
+    ax.tick_params(axis='x', top=True, labeltop=False, which='major')
 
 def plot_candidate(cand):
     """
