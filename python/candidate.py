@@ -7,6 +7,8 @@ import astropy.units as uu
 from astropy.time import Time
 # from datetime import datetime
 import textwrap
+import matplotlib.ticker as ticker 
+import os
 
 log = logging.getLogger('riptide.candidate')
 
@@ -535,7 +537,7 @@ def plot_table(params, tsmeta):
     ax = plt.gca()
     ax.tick_params(axis='both', which='major',
                direction='in', length=8, width=1.5,
-               labelsize=12)
+               labelsize=14)
 
 def plot_dm_curve(dm, snr):
     dm_min = dm.min()
@@ -558,15 +560,14 @@ def plot_dm_curve(dm, snr):
     #plt.xlabel("Trial DM (pc cm$^{-3}$)")
     plt.xlabel("Trial DM (pc cm$^{-3}$)", fontsize=16)
     plt.ylabel("Best S/N", fontsize=16)
-    plt.tick_params(axis='both', which='major', labelsize=18)
     plt.tick_params(axis='y', labelrotation=90)
-    plt.legend(loc='best',fontsize=20)
+    plt.legend(loc='best',fontsize=18)
     #ax = plt.gca()
     #ax.set_xticks([])
     ax = plt.gca()
     ax.tick_params(axis='both', which='major',
                direction='in', length=8, width=1.5,
-               labelsize=12)
+               labelsize=14)
 
 def plot_subints(X, T):
     """
@@ -611,8 +612,10 @@ def plot_subints(X, T):
     plt.xlabel("Pulse Phase (2 Periods)", fontsize=16)
     plt.tick_params(axis='y', labelrotation=90)
     # Phase axis ticks
-    plt.xticks([0.0, 0.5, 1.0, 1.5, 2.0], fontsize=12)
-    plt.yticks(fontsize=12)
+    plt.xticks([0.0, 0.5, 1.0, 1.5, 2.0], fontsize=14)
+    ax = plt.gca()
+    ax.xaxis.set_minor_locator(ticker.AutoMinorLocator())
+    #ax.yaxis.set_minor_locator(ticker.AutoMinorLocator())
     # Tick style
     ax = plt.gca()
     ax.tick_params(
@@ -621,8 +624,9 @@ def plot_subints(X, T):
         direction='in',
         length=8,
         width=1.5,
-        labelsize=12
+        labelsize=14
     )
+    ax.tick_params(axis='both', which='minor', direction='in', length=6,width=1.5,labelsize=12)
 
 def plot_profile(P):
     """
@@ -636,6 +640,7 @@ def plot_profile(P):
     phase = np.linspace(0, 2, nbins_ext, endpoint=False)
     # Plot profile
     plt.plot(phase, P - np.median(P), color='black', lw=2.)
+    plt.axhline(y=0, color='gray', linestyle='--', linewidth=1)
     ymin, ymax = plt.ylim()
     # Fill the second period region (1.0–2.0)
     plt.fill_between([1, 2], [ymin, ymin], [ymax, ymax], color='b', alpha=0.04)
@@ -646,15 +651,23 @@ def plot_profile(P):
     # Set tick positions but hide labels
     ax = plt.gca()
     ax.set_xticks([0.0, 0.5, 1.0, 1.5, 2.0])
+    ax.xaxis.set_minor_locator(ticker.AutoMinorLocator())
+    #ax.yaxis.set_minor_locator(ticker.AutoMinorLocator())
     ax.set_xticklabels([])   # <-- hide numbers
     #ax.set_xticks([])
     #ax.set_xticklabels([])
     #ax.set_yticklabels([])
     plt.tick_params(axis='y', labelrotation=90)
     # Beautify ticks
-    ax.tick_params(axis='both', which='major',
-                   direction='in', length=8, width=1.5,
+    ax.tick_params(axis='x', which='major',
+                   direction='inout', length=12, width=1.5,
+                   labelsize=14)
+    ax.tick_params(axis='x', which='minor',
+                   direction='inout', length=6, width=1.5,
                    labelsize=12)
+    ax.tick_params(axis='y', which='major',
+                   direction='in', length=8, width=1.5,
+                   labelsize=14)
 
 def plot_candidate(cand):
     """
@@ -663,9 +676,9 @@ def plot_candidate(cand):
     # https://matplotlib.org/tutorials/intermediate/gridspec.html
     nrows, ncols = 18, 14
     gs = GridSpec(nrows, ncols, figure=plt.gcf())
-    plt.subplot(gs[4:, :4])
+    plt.subplot(gs[5:, :4])
     plot_subints(cand.subints, cand.tsmeta['tobs'])
-    plt.subplot(gs[:4, :4])
+    plt.subplot(gs[:5, :4])
     plot_profile(cand.profile)
     plt.subplot(gs[:10, 4:])
     plot_table(cand.params, cand.tsmeta)
