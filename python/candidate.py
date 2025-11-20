@@ -8,6 +8,7 @@ from astropy.time import Time
 # from datetime import datetime
 import textwrap
 import matplotlib.ticker as ticker 
+import os
 
 log = logging.getLogger('riptide.candidate')
 
@@ -138,6 +139,8 @@ class Candidate(object):
         fig = self.plot(**kwargs)
         # fig.savefig(fname)
         fig.savefig(fname, bbox_inches="tight", pad_inches=0.15)
+        # .pdf
+        name, _ = os.path.splitext(fname); pdf_fname = f"{name}.pdf"; fig.savefig(pdf_fname, bbox_inches="tight", pad_inches=0.15) 
         plt.close(fig)
 
     def __str__(self):
