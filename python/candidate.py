@@ -343,7 +343,7 @@ def plot_table(params, tsmeta):
     plt.text(
         x=0.25,  # Center of left column (between 0.05 and 0.35)
         y=0.88, 
-        s="observation information", 
+        s="Observation information", 
         ha='center', 
         va='top', 
         #family='fantasy', 
@@ -355,7 +355,7 @@ def plot_table(params, tsmeta):
     plt.text(
         x=0.75,  # Center of right column (between 0.55 and 0.85)
         y=0.88, 
-        s="search information", 
+        s="Search information", 
         ha='center', 
         va='top', 
         #family='monospace', 
