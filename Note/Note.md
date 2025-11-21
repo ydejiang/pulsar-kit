@@ -8,14 +8,20 @@ ls *.xz | xargs -n1 -I{} -P50 xz -d  {}
 ```
 ```
 for ((i = 1; i <= 100; i++)); do echo $i ; done
+
 rfifind -time 2.0 -o C1_tracking-M01_20241223 C1_tracking-M01_{0001..0020}.fits
+
 files=$(ls /home/data/M92/20240101/*.fits | tail -n +210 | head -n 300)
+
 prepfold -topo -nosearch -noxwin -n 64 -npart 128 -dm 35.30 -accelcand 87 -accelfile M92_20240101_DM35.30_ACCEL_10.cand  -o ./M92_20240101_DM35.30_ACCEL_10.cand-210-510fits ${files}
+
 seq 1 1 1329 | xargs -n1 -P5 -I{} prepfold -nosearch -noxwin -topo -n 64 -accelcand {} -accelfile M15_20201221_DM66.95_red_ACCEL_600.cand M15_20201221_DM66.95_red.dat
+
 ls  *.dat | xargs -n 1 -P 20 --replace prepfold -noxwin -nosearch -topo -n 64 -npart 128 -par *.par {}
 
 find . -maxdepth 1 -name "*.fft" | sort -V
-find . -maxdepth 1 -name "*_red.fft" | sort -V 
+find . -maxdepth 1 -name "*_red.fft" | sort -V
+
 find ${Output_Dir}/segment_* -maxdepth 1 -name "*.fft" | sort -V | xargs -n1 -P"${P}" -I{} rm -rf {}
 
 ls -v -d /home/data/ydj/ydj/M13/lwang/M13/search/*/segment_s*/ | xargs -n1 -I{} echo "cd {} && ls *.dat | xargs -n1 -P50 -I{} realfft {}" > realfft.txt
@@ -434,6 +440,42 @@ docker run -it -v E:\Docker\data:/home/data -v E:\Docker\data1:/home/data1 -e DI
 docker exec -it -u jovyan ipta /bin/bash
 docker pull registry.cn-hangzhou.aliyuncs.com/pulsars/ubuntu22.04:latest
 git clone https://github.com/ipta/ipta-2018-workshop
+
+
+##-------------------------------------------------------------------------------------------------------------------------------------------------
+# podman 创建容器流程
+# centos and ubuntu ( under the root)
+[root@localhost chenyujie]# apt install podman  # ubuntu
+[root@localhost chenyujie]# yum install podman  # centos
+
+# buildah pull the images ( under the root)
+podman pull registry.cn-hangzhou.aliyuncs.com/pulsars/ubuntu22.04:v8.28  # created in 2025.8.28, include presto5.1, dspsr, psrchive et al.
+
+*********************************************************************************************************************
+# Verify the images exist ( use sudo!)
+[chenyujie@localhost cyj]$ sudo podman images
+REPOSITORY                                              TAG     IMAGE ID       CREATED        SIZE
+registry.cn-hangzhou.aliyuncs.com/pulsars/ubuntu22.04   v8.28   026e8dc2e432   45 hours ago   16.9 GB
+
+# created the container by the images (use sudo!)
+[chenyujie@localhost cyj]$ sudo podman run -it -v /home/data:/home/data --privileged --name pulsars 026e8dc2e432
+
+# mount the catalogue and enter the container (use sudo!)
+[chenyujie@localhost cyj]$ sudo podman exec -it -u chenyujie pulsars /bin/bash
+
+#sudo/su
+ passwd (in chenyujie): cyj1001
+
+###
+unset ALL_PROXY
+unset all_proxy
+unset http_proxy
+unset https_proxy
+unset HTTP_PROXY
+unset HTTPS_PROXY
+
+这四个放到.bashrc中,解决容器里面下载不了东西的问题
+###
 ```
 ### polarization calibration
 ```
