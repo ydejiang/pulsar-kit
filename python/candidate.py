@@ -325,7 +325,7 @@ def plot_table(params, tsmeta):
     # Convert observation time from MJD to UTC
     obsdate = Time(tsmeta['mjd'], format='mjd', scale='utc', precision=0)
     # Add centered title
-    title_text = "riptide: Finding pulsars with the Fast Folding Algorithm"
+    title_text = "RIPTIDE: Finding pulsars with the Fast Folding Algorithm"
     plt.text(
         x=0.5, 
         y=0.97, 
@@ -342,24 +342,24 @@ def plot_table(params, tsmeta):
     # Left column title: "Observation information"
     plt.text(
         x=0.25,  # Center of left column (between 0.05 and 0.35)
-        y=0.89, 
-        s="Observation information", 
+        y=0.88, 
+        s="observation information", 
         ha='center', 
         va='top', 
         #family='fantasy', 
-        fontsize=20,
+        fontsize=22,
         #fontweight='bold'
     )
 
     # Right column title: "Search information"
     plt.text(
         x=0.75,  # Center of right column (between 0.55 and 0.85)
-        y=0.89, 
-        s="Search information", 
+        y=0.88, 
+        s="search information", 
         ha='center', 
         va='top', 
         #family='monospace', 
-        fontsize=20,
+        fontsize=22,
         #fontweight='bold'
     )
     ax = plt.gca()  # Get the current axes object (the subplot being worked on)
@@ -370,7 +370,7 @@ def plot_table(params, tsmeta):
     ax.text(
     x=0.02,               # Left-alignment starting point: 5% to the right of the subplot's left edge
                           # (align with other left-aligned text elements in the plot)
-    y=0.13,               # Fixed Y-height: 12% of the subplot's total height (adjust as needed)
+    y=0.19,               # Fixed Y-height: 12% of the subplot's total height (adjust as needed)
     s=wrapped_text ,  # Text content: Combine label with the actual basename
     #s=textwrap.fill(f"Basename: {tsmeta['basename']}", width=30),
     ha='left',            # Horizontal alignment: Left-aligned (text extends right from x=0.05)
@@ -387,8 +387,9 @@ def plot_table(params, tsmeta):
     current_time = Time.now()
     time_str = current_time.isot.split('.')[0] + ' UTC'
     ax.text(
-        x=0.915, y=0.17,
-        s=f'@: {time_str}',
+        x=0.97, y=0.01,
+        #s=f'@: {time_str}',
+        s=f"{tsmeta['analyst']}@{time_str}",
         transform=ax.transAxes,  
         ha='right', va='bottom',
         fontsize=20,
@@ -447,12 +448,12 @@ def plot_table(params, tsmeta):
             formatter='s',
             unit=''
         ),
-         TableEntry(
-            name='Analyst',
-            value=tsmeta['analyst'],
-            formatter='s',
-            unit=''
-        ),
+#         TableEntry(
+#            name='Analyst',
+#            value=tsmeta['analyst'],
+#            formatter='s',
+#            unit=''
+#        ),
     ]
 
     # Right column: Source info & observation time
@@ -503,7 +504,7 @@ def plot_table(params, tsmeta):
     ]
 
     # Layout parameters (adjusted for title)
-    y0 = 0.78  # Lowered to make space for title
+    y0 = 0.75  # Lowered to make space for title
     dy = 0.086   # Row spacing
     left_X = [0.02, 0.46, 0.49]  # Original 3-column X coordinates (name, value, unit)
     right_X = [0.52, 0.97, 0.99]  # Right column uses same 3-column structure
