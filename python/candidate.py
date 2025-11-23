@@ -609,7 +609,7 @@ def plot_subints(X, T):
         #origin='upper'  # So t=0 is at the top
     )
     # Highlight the second period region (1.0–2.0)
-    plt.fill_between([1, 2], [0, 0], [T, T], color='b', alpha=0.04)
+    # plt.fill_between([1, 2], [0, 0], [T, T], color='b', alpha=0.04)
     # Axis settings
     plt.xlim(0, 2)
     plt.ylabel("Time (seconds)", fontsize=16)
@@ -649,7 +649,7 @@ def plot_profile(P):
     plt.axhline(y=0, color='gray', linestyle='--', linewidth=1)
     ymin, ymax = plt.ylim()
     # Fill the second period region (1.0–2.0)
-    plt.fill_between([1, 2], [ymin, ymin], [ymax, ymax], color='b', alpha=0.04)
+    # plt.fill_between([1, 2], [ymin, ymin], [ymax, ymax], color='b', alpha=0.04)
     plt.ylim(ymin, ymax)
     # Axis limits
     plt.xlim(0, 2)
