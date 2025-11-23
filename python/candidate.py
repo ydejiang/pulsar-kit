@@ -554,10 +554,10 @@ def plot_dm_curve(dm, snr):
                 label='optimal S/N')
 
     # Avoid matplotlib warning when calling xlim() with two equal values 
-    if dm_min == dm_max:
-        plt.xlim(dm_min - 0.5, dm_min + 0.5)
-    else:
-        plt.xlim(dm_min, dm_max)
+    #if dm_min == dm_max:
+    #    plt.xlim(dm_min - 0.5, dm_min + 0.5)
+    #else:
+    #    plt.xlim(dm_min, dm_max)
     plt.grid(linestyle=':')
     #plt.xlabel("Trial DM (pc cm$^{-3}$)")
     plt.xlabel("Trial DM (pc cm$^{-3}$)", fontsize=16)
