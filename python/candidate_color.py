@@ -137,9 +137,13 @@ class Candidate(object):
         file name. Accepts the same keyword arguments as plot().
         """
         fig = self.plot(**kwargs)
+        basename = self.tsmeta.get('basename', 'unknown')
+        basename = os.path.basename(basename)
+        fname_root, fname_ext = os.path.splitext(fname)
+        fname = f"{fname_root}_{basename}{fname_ext}"
         # fig.savefig(fname)
         fig.savefig(fname, bbox_inches="tight", pad_inches=0.15)
-        name, _ = os.path.splitext(fname); pdf_fname = f"{name}.pdf"; fig.savefig(pdf_fname, bbox_inches="tight", pad_inches=0.15)
+        # name, _ = os.path.splitext(fname); pdf_fname = f"{name}.pdf"; fig.savefig(pdf_fname, bbox_inches="tight", pad_inches=0.15)
         plt.close(fig)
 
     def __str__(self):
