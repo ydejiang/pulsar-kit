@@ -606,7 +606,7 @@ def plot_subints(X, T):
         interpolation='nearest',
         aspect='auto',
         extent=extent,
-        origin='upper'  # So t=0 is at the top
+        #origin='upper'  # So t=0 is at the top
     )
     # Highlight the second period region (1.0–2.0)
     plt.fill_between([1, 2], [0, 0], [T, T], color='b', alpha=0.04)
