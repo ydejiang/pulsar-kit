@@ -11,7 +11,7 @@
         6. <code>candidate.py</code> and <code>dmiter.py</code> are used in FFA search package <code>riptide</code> (https://github.com/v-morello/riptide) for generating customized candidate plots and ignoring optimal DM step plan.<br>
         7. <code>PulsarPICK</code>, a simple pipeline adapted from PRESTO's <code>ACCEL_sift.py</code> for processing <code>accelsearch</code> results. It also generates user-friendly candidate diagnostic plots by combining the standard time-series folding plot with a trial-DM versus detection-significance curve, where real pulsars typically show a bell-shaped peak around the optimal DM.<br>
         8. <code>Astronomy_Alerts</code>; a simple pipeline for aggregating ATel (The Astronomer's Telegram, https://www.astronomerstelegram.org/) and GCN Circular (NASA's Time-Domain and Multimessenger Alert System, https://gcn.nasa.gov/circulars) emails using a Tencent email address (QQ).<br>
-        9. <code>ATNFCAT_PSRcat_download.ipynb</code>; a simple PulsarCAT download tutorial with the <code>psrqpy</code> package (https://psrqpy.readthedocs.io/en/latest/index.html).<br>
+        9. <code>ATNF_PSRcat_download.ipynb</code>; a simple PulsarCAT download tutorial with the <code>psrqpy</code> package (https://psrqpy.readthedocs.io/en/latest/index.html).<br>
         ...
       </details>
     </td>
