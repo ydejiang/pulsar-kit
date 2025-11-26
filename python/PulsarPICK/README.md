@@ -14,3 +14,6 @@ bash /path/to/code/PCSSP_sift.bash
 
 #### candidate plot from ACCEL_sift routine:
 <img src="./ACCEL_sift/Pms3.7222-M13_20181006_s1_1-140fits_DM30.10_red.dat_JERK_Cand_7.pfd.png" alt="candidate plot from ACCEL_sift routine" width="400">
+
+#### candidate plot from PCSSP_sift routine:
+<img src="./PCSSP_sift/Pms3.7222_M13_20181006_s1_1-140fits_DM30.15_red.dat_ACCEL_Cand_13.pfd.png" alt="candidate plot from PCSSP_sift routine" width="400">
