@@ -369,6 +369,7 @@ def plot_table(params, tsmeta):
     ax = plt.gca()  # Get the current axes object (the subplot being worked on)
     # Basename text: Left-aligned + Auto-wrap for long text + Fixed Y-height
     basename = tsmeta['basename']
+    basename = os.path.basename(basename)
     wrapped_text = textwrap.fill(f"File: {basename}", width=57)
     
     ax.text(
