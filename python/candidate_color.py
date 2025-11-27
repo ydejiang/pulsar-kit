@@ -599,7 +599,8 @@ def plot_subints(X, T):
             X_norm[i, :] = (sub_data - min_val) / (max_val - min_val)  # Normalize to 0~1 range
 
     # Extend phase to two periods
-    X_norm = np.hstack((X_norm, X_norm[:, :nbins//2 * 2]))
+    #X_norm = np.hstack((X_norm, X_norm[:, :nbins//2 * 2]))
+    X_norm = np.hstack((X_norm, X_norm))
     _, nbins_ext = X_norm.shape
     # Define extent in phase (0~2) and time (0~T) units
     extent = [0, 2, 0, T]
