@@ -10,7 +10,7 @@
 ###### updated folding plot (for long period pulsar with narrow duty) 
 <p float="left">
   <img src="./images/candidate_0000_118.705ms_C1_tracking_20240929_DM34.20.black.png width="30%" />
-  <img src="./images/candidate_0000_118.705ms_C1_tracking_20240929_DM34.20.colot.png" width="30%" />
+  <img src="./images/candidate_0000_118.705ms_C1_tracking_20240929_DM34.20.color.png" width="30%" />
 </p>
 
 ###### long period pulsar with narrow duty, examples 
