@@ -1,14 +1,14 @@
 ###### candidate folding plot from riptide:
 <img src="./images/candidate_original.png" alt="candidate folding plot from riptide" width="300">
 
-###### updated candidate folding plot (black) from riptide:
-<img src="./images/candidate.py_black.png" alt="updated candidate folding plot (black) from riptide" width="300">
-
-###### updated candidate folding plot (color) from riptide:
-<img src="./images/candidate.py_color.png" alt="updated candidate folding plot (black) from riptide" width="300">
-
-
+###### updated folding plot (black and color) 
 <p float="left">
   <img src="./images/candidate.py_black.png" width="45%" />
   <img src="./images/candidate.py_color.png" width="45%" />
+</p>
+
+###### updated folding plot (for long period pulsar with narrow duty) 
+<p float="left">
+  <img src="./images/candidate_0000_C1_tracking_DM33.60_red.black.png" width="45%" />
+  <img src="./images/candidate_0000_C1_tracking_DM33.60_red.color.png" width="45%" />
 </p>
