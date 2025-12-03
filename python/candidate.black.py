@@ -563,28 +563,25 @@ def plot_subints(X, T):
         Integration time in seconds
     """
     nsubs, nbins = X.shape  # Get number of sub-integrations and phase bins
-    # --------------------------
-    # Core: Local normalization (each sub-integration scaled to 0~1 independently)
-    # --------------------------
-    X_norm = np.zeros_like(X, dtype=np.float32)
-    for i in range(nsubs):
-        sub_data = X[i, :]
-        min_val = np.min(sub_data)
-        max_val = np.max(sub_data)
-        if np.isclose(min_val, max_val, atol=1e-7):
-            X_norm[i, :] = 0.0  # Set flat data (no fluctuation) to 0
-        else:
-            X_norm[i, :] = (sub_data - min_val) / (max_val - min_val)  # Normalize to 0~1 range
+    # Peak-to-Peak normalization
+    mins = X.min(axis=1).reshape(-1, 1)
+    maxs = X.max(axis=1).reshape(-1, 1)
+    ranges = maxs - mins
 
+    # Avoid division by zero (flat subints)
+    ranges[ranges == 0] = 1
+
+    # Normalize each subint row to [0, 1]
+    X = (X - mins) / ranges
+    
     # Extend phase to 1.5 periods
-    X_norm = np.hstack((X_norm, X_norm[:, : nbins // 2]))
-    _, nbins_ext = X_norm.shape
-    # Define extent in phase (0~1.5) and time (0~T) units
+    X = np.hstack((X, X[:, : nbins // 2]))
+    _, nbins_ext = X.shape
     extent = [0, 1.5, 0, T]
-    # Use reversed grayscale (white→black gradient, stronger signals appear darker, matching Presto style)
+
     plt.imshow(
-        X_norm,
-        cmap='gray_r',  # Replace viridis with reversed grayscale to mimic Presto's white-black gradient
+        X,
+        cmap='Greys',  # Replace viridis with reversed grayscale to mimic Presto's white-black gradient
         interpolation='nearest',
         aspect='auto',
         extent=extent,
@@ -618,24 +615,24 @@ def plot_subints0(X, T):
     """
     nsubs, nbins = X.shape  # Get number of sub-integrations and phase bins
     # --------------------------
-    # Core: Local normalization (each sub-integration scaled to 0~1 independently)
-    # --------------------------
-    X_norm = np.zeros_like(X, dtype=np.float32)
-    for i in range(nsubs):
-        sub_data = X[i, :]
-        min_val = np.min(sub_data)
-        max_val = np.max(sub_data)
-        if np.isclose(min_val, max_val, atol=1e-7):
-            X_norm[i, :] = 0.0  # Set flat data (no fluctuation) to 0
-        else:
-            X_norm[i, :] = (sub_data - min_val) / (max_val - min_val)  # Normalize to 0~1 range
+
+    # Peak-to-Peak normalization
+    mins = X.min(axis=1).reshape(-1, 1)
+    maxs = X.max(axis=1).reshape(-1, 1)
+    ranges = maxs - mins
+
+    # Avoid division by zero (flat subints)
+    ranges[ranges == 0] = 1
+
+    # Normalize each subint row to [0, 1]
+    X = (X - mins) / ranges
 
     # Extend phase to 1.5 periods
-    X_norm = np.hstack((X_norm, X_norm[:, : nbins // 2]))
-    _, nbins_ext = X_norm.shape
+    X = np.hstack((X, X[:, : nbins // 2]))
+    _, nbins_ext = X.shape
 
     plt.imshow(
-        X_norm,
+        X,
         cmap="Greys",
         interpolation="nearest",
         aspect="auto",
