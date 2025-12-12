@@ -105,5 +105,19 @@ if len(cands):
 # Write candidates to STDOUT
 if len(cands):
     cands.sort(key=attrgetter('sigma'), reverse=True)
-    # sifting.write_candlist(cands)
-    sifting.write_candlist(cands, 'cands.txt')
+    #sifting.write_candlist(cands)
+    #sifting.write_candlist(cands, 'cands.txt')
+    # From ypmen, pulsarX
+    print("#id   dm acc  F0 F1 F2 S/N", file=sys.stderr)
+    for k,cand in enumerate(cands):
+		z0 = cand.z - 0.5 * cand.w
+		r0 = cand.r - 0.5 * z0 - cand.w / 6.
+		f = r0 / cand.T
+		fd = z0 / (cand.T * cand.T)
+		fdd = cand.w / (cand.T * cand.T * cand.T)
+		f0 = f + fd * (cand.T / 2.) + 0.5 * fdd * (cand.T / 2.)**2
+		f1 = fd + fdd * (cand.T / 2.)
+		f2 = fdd
+		print("%d\t%.3f\t%.15f\t%.15f\t%.15f\t%.15f\t%.2f" % (k+1, cand.DM, 0., f0, f1, f2, cand.snr), file=sys.stderr)
+    
+
