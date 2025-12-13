@@ -24,3 +24,12 @@ find /usr/local/lib/python3.10/site-packages/riptide -name "candidate.py"
 ####---------------------
 1，candidate_color.py, 是彩色图版本，使用时candidate_color.py改成candidate.py放进riptide对应的目录替换即可。
 2，candidate.py是黑白版本。
+
+
+
+###
+
+sifting.py, 解决JERK搜索时W不输出的问题，用于pulsarX折叠计算F2 
+
+import presto.sifting as sifting
+print(sifting.__file__)
