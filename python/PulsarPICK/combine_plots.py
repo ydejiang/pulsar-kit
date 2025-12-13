@@ -72,7 +72,7 @@ def main():
     # Resize the second image to have the same width as the first image and scale the height proportionally
     width_ratio = target_width / image2.width
     new_height = int(image2.height * width_ratio)
-    image2 = image2.resize((target_width, new_height), Image.BILINEAR)
+    image2 = image2.resize((target_width, new_height), Image.Resampling.LANCZOS)
     # Vertically merge the two images
     merged_image = vertical_merge_images(image1, image2)
     # Save the merged image
