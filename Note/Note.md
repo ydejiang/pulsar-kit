@@ -476,6 +476,33 @@ unset HTTPS_PROXY
 
 这四个放到.bashrc中,解决容器里面下载不了东西的问题
 ###
+
+*********************************************************************************************************************
+2025/12/15
+
+# centos and ubuntu ( under the root)
+[root@localhost chenyujie]# apt install podman  # ubuntu
+[root@localhost chenyujie]# yum install podman  # centos
+
+# buildah pull the images ( under the root)
+#podman pull registry.cn-hangzhou.aliyuncs.com/pulsars/ubuntu22.04:v8.28  # created in 2025.8.28, include presto5.1, dspsr, psrchive et al.
+podman pull registry.cn-hangzhou.aliyuncs.com/pulsars/ubuntu22.04:latest
+*********************************************************************************************************************
+# Verify the images exist ( use sudo!)
+[chenyujie@localhost cyj]$ sudo podman images
+REPOSITORY                                              TAG     IMAGE ID       CREATED        SIZE
+registry.cn-hangzhou.aliyuncs.com/pulsars/ubuntu22.04   v8.28   026e8dc2e432   45 hours ago   16.9 GB
+
+# created the container by the images (use sudo!) -v 后接 挂载目录路径：容器内挂载目录路径
+[chenyujie@localhost cyj]$ sudo podman run -it -v /home/data:/home/data --privileged --name pulsars 026e8dc2e432
+
+# mount the catalogue and enter the container (use sudo!)
+[chenyujie@localhost cyj]$ sudo podman exec -it -u chenyujie pulsars /bin/bash
+
+#sudo/su
+ passwd (in chenyujie): cyj1001
+
+# 容器中的命令都是在用户chenyujie下创建的，进入容器需要source /home/chenyujie/.bashrc或者cp /home/chenyujie/.bashrc到自己主目录下即可。
 ```
 ### polarization calibration
 ```
