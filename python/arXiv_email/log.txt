@@ -1,1 +1,21 @@
 ### 使用说明。
+
+1, 该脚本来源Filarkey: Filtering latest arXiv papers by keywords and topics：https://github.com/pulsar-xliu/filter_arxiv_by_keywords。
+2，此处仅仅添加了邮箱发送功能。
+3，只需要在def main():
+ # QQ Mail SMTP configuration
+    smtp_server = "smtp.qq.com"
+    smtp_port   = 587
+    sender_email = "demo@qq.com"
+    sender_password = "fplkgcpl****"   # QQ Mail authorization code
+    receiver_emails = ["20251216@qq.com", "demo@qq.com", "demo@foxmail.com"]
+    receiver_email = receiver_emails
+
+修改发送的邮箱服务，端口，地址和授权码，还有邮件发送的地址, 我这里用的是腾讯qq邮箱。
+4，把脚本放在联网的Linux系统（比如服务器了），通过crontab来控制每天执行一次，将更新的内容发送到指定邮箱地址。
+比如每24小时执行一次,每天下午三点半执行：
+30 15 * * * /home/yindejiang/anaconda3/bin/python3 /home/yindejiang/filarkey_email.py > /dev/null 2>&1
+
+5，如果你不想每次生成的文件占用本地储存，那么可以对生成的文本内容清空，仅留下文件名作为是否更新的判断。那么，你就可以把下面的内容放进crontab:
+30 15 * * * /home/yindejiang/anaconda3/bin/python3 /home/yindejiang/filarkey_email.py > /dev/null 2>&1
+30 18 * * * cd /home/yindejiang/arXiv/astro-ph/ && find . -name "*.html" -exec truncate -s 0 {} \;
