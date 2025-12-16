@@ -162,7 +162,17 @@ def write_html(all_keywords, major_keyword, date, filename, lines_titles, lines_
                         f.write(f"; {other_subjects}")
                     f.write("</span>\n")
 
-                f.write(f"<p style='padding-left: 40px;'>{abstract}</p>\n")
+                # f.write(f"<p style='padding-left: 40px;'>{abstract}</p>\n")
+                f.write(
+                    f"""
+                    <details style="padding-left: 40px;">
+                    <summary style="cursor: pointer; font-size: 1.2em; color: blue;">
+                    Abstract (click to expand)
+                    </summary>
+                    <p style="margin-top: 8px;">{abstract}</p>
+                    </details>
+                     """
+                )
                 count_paper += 1
         f.write("<p>End of selected papers.</p>\n")
         f.write(f"<br>\n")
