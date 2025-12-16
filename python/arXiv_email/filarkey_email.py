@@ -1,5 +1,4 @@
 #!/usr/local/bin/python
-
 import os
 import sys
 import datetime
@@ -10,6 +9,9 @@ from bs4 import BeautifulSoup
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+
+# This code was adapted from (Dr. Liu):
+# Filarkey: Filtering latest arXiv papers by keywords and topics：https://github.com/pulsar-xliu/filter_arxiv_by_keywords.
 
 # Define website to be read 
 link = "https://arxiv.org/list/astro-ph/new"
