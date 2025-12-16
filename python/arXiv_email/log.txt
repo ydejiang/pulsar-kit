@@ -36,5 +36,5 @@ Filarkey：基于关键词的 arXiv 新论文自动筛选与邮件推送脚本
 30 15 * * * /home/yindejiang/anaconda3/bin/python3 /home/yindejiang/filarkey_email.py > /dev/null 2>&1
 
 5，如果你不想每次生成的文件占用本地储存，那么可以对生成的文本内容清空，仅留下文件名作为是否更新的判断。那么，你就可以把下面的内容放进crontab:
-30 15 * * * /home/yindejiang/anaconda3/bin/python3 /home/yindejiang/filarkey_email.py > /dev/null 2>&1
+30 15 * * * /home/yindejiang/anaconda3/bin/python3 /home/yindejiang/arXiv/filarkey_email.py > /dev/null 2>&1
 30 18 * * * cd /home/yindejiang/arXiv/astro-ph/ && find . -name "*.html" -exec truncate -s 0 {} \;
