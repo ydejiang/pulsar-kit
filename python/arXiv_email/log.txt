@@ -38,23 +38,6 @@ base_path = '/home/yindejiang/arXiv'
 link = "https://arxiv.org/list/astro-ph/new"
 以及你关心的领域及其对应的关键词列表。
 
-## 
-避免大小问题写匹配不上，对应可以改成下面这样。。。。
-# Define keywords. 
-# Use all_keywords for filtering. Report major_keyword only.major_keyword_0  = ["pulsar", "neutron star", "black hole", "magnetar", "fast radio burst", "gravitational wave", "radio telescope"]
-major_keyword_1  = ["Pulsar", "Neutron Star", "Black Hole", "Magnetar", "Fast Radio Burst", "Gravitational Wave", "Radio Telescope"]
-
-major_keywords_0 = ["pulsars", "neutron stars", "black holes", "magnetars", "fast radio bursts", "gravitational waves", "radio telescopes"]
-major_keywords_1 = ["Pulsars", "Neutron Stars", "Black Holes", "Magnetars", "Fast Radio Bursts", "Gravitational Waves", "Radio Telescopes"]
-
-minor_keywords_0 = ["X-ray binary", "globular cluster", "open cluster"]
-minor_keywords_1 = ["X-ray Binary", "Globular Cluster", "Open Cluster"]
-
-short_keywords = ["MeerKAT", "SKA", "LMXB", "NS", "BH", "GW", "FRB", "FAST"]
-
-all_keywords = major_keyword_0 + major_keyword_1 + major_keywords_0 + major_keywords_1 + minor_keywords_0 + minor_keywords_1 + short_keywords
-##
-
 4，把脚本放在联网的Linux系统（比如服务器了），通过crontab来控制每天执行一次，将更新的内容发送到指定邮箱地址。
 比如每24小时执行一次,每天下午三点半执行：
 30 15 * * * /home/yindejiang/anaconda3/bin/python3 /home/yindejiang/filarkey_email.py > /dev/null 2>&1
