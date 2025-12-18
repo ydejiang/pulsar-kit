@@ -9,6 +9,7 @@ from bs4 import BeautifulSoup
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import re
 
 # This code was adapted from (Dr. Liu):
 # Filarkey: Filtering latest arXiv papers by keywords and topics: https://github.com/pulsar-xliu/filter_arxiv_by_keywords.
