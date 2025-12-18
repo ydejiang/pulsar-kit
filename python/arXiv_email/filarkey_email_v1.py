@@ -300,9 +300,9 @@ def main():
     # QQ Mail SMTP configuration
     smtp_server = "smtp.qq.com"
     smtp_port   = 587
-    sender_email = "atel_gcn@qq.com"
-    sender_password = "fplkgcplcikecjec"   # QQ Mail authorization code
-    receiver_emails = ["yin.dj@qq.com", "yfeng.dai@foxmail.com", "1938079121@qq.com", "2896663909@qq.com"]
+    sender_email = "demo@qq.com"
+    sender_password = "code"   # QQ Mail authorization code
+    receiver_emails = ["demo@qq.com", "20151218demo@qq.com"]
     # receiver_emails = ["atel_gcn@qq.com"]
     receiver_email = receiver_emails
 
