@@ -181,7 +181,7 @@ def write_html(all_keywords, major_keyword, date, filename, lines_titles, lines_
                         font-size: 0.8em;
                         font-weight: 600;
                         color: white;
-                        background-color: #5f86c6;
+                        background-color: #7a9bd4;
                         border-radius: 4px;
                         vertical-align: middle;
                         "
