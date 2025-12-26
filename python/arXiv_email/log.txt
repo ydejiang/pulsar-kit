@@ -39,6 +39,11 @@ link = "https://arxiv.org/list/astro-ph/new"
 以及你关心的领域及其对应的关键词列表。
 
 4，把脚本放在联网的Linux系统（比如服务器了），通过crontab来控制每天执行一次，将更新的内容发送到指定邮箱地址。
+可以通过下面两个命令编辑和查看任务：
+
+crontab -e
+crontab -l
+
 比如每24小时执行一次,每天下午三点半执行：
 30 15 * * * /home/yindejiang/anaconda3/bin/python3 /home/yindejiang/filarkey_email.py > /dev/null 2>&1
 
