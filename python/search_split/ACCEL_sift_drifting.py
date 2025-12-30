@@ -146,6 +146,7 @@ if len(cands):
     for k, cand in enumerate(cands):
         candnum = cand.candnum
         accelfile = cand.filename
+        dm = cand.DMstr
         outprefix = accelfile.split("_ACCEL")[0]
         accelfile = accelfile + ".cand"
         # ---- parse chunk info ----
@@ -160,6 +161,6 @@ if len(cands):
             # fallback: full observation, none
             start_end_opt = ""
 
-        cmd = f"prepfold -topo -nosearch -noxwin {start_end_opt} -accelcand {candnum} -accelfile {accelfile} -o {outprefix}"
+        cmd = f"prepfold -topo -nosearch -noxwin {start_end_opt} -dm {dm} -accelcand {candnum} -accelfile {accelfile} -o {outprefix}"
         print(cmd, file=sys.stderr)
 
