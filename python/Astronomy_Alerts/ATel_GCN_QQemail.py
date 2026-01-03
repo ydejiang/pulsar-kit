@@ -15,6 +15,7 @@ from email.mime.text import MIMEText
 from datetime import datetime, timedelta
 import pytz
 import argparse
+import html
 
 # --------------------------
 # Configuration Section
@@ -330,7 +331,8 @@ def generate_combined_email(atels, gcns):
     for atel in atels:
         atel_content.append(
             #f"#{atel['num']}. {atel['title']} ({atel['posted_date']}) [{atel['url']}]"
-            f"#{atel['num']}. {atel['title']} [{atel['url']}]"
+            #f"#{atel['num']}. {atel['title']} [{atel['url']}]"
+            f"""#{atel['num']}. <a href="{atel['url']}" style="text-decoration:none;">{html.escape(atel['title'])}</a>"""
         )
     
     # Process GCN information
@@ -342,7 +344,8 @@ def generate_combined_email(atels, gcns):
     for gcn in gcns:
         gcn_content.append(
             #f"#{gcn['num']}. {gcn['subject']} ({gcn['posted_date']}) [{gcn['url']}]"
-            f"#{gcn['num']}. {gcn['subject']} [{gcn['url']}]"
+            #f"#{gcn['num']}. {gcn['subject']} [{gcn['url']}]"
+            f"""#{gcn['num']}. <a href="{gcn['url']}" style="text-decoration:none;">{html.escape(gcn['subject'])}</a>"""
         )
     
     # Generate subject line by combining ATel and GCN parts
@@ -372,7 +375,8 @@ def generate_combined_email(atels, gcns):
         body_parts.append("GCN Circulars:\n" + "\n".join(gcn_content))
     
     # Combine all parts into final email body
-    body_text = header + "\n".join(body_parts)
+    #body_text = header + "\n".join(body_parts)
+    body_text = (header + "\n".join(body_parts)).replace("\n", "<br>\n")
     return subject, body_text
 
 def send_email(subject, content, email_account=None, email_password=None, target_emails=None):
@@ -396,7 +400,8 @@ def send_email(subject, content, email_account=None, email_password=None, target
     
     try:
         # Create MIME email message
-        msg = MIMEText(content, "plain", "utf-8")
+        #msg = MIMEText(content, "plain", "utf-8")
+        msg = MIMEText(content, "html", "utf-8")
         msg["Subject"] = subject
         msg["From"] = email_account
         msg["To"] = ", ".join(target_emails)  # Multiple recipients separated by comma
