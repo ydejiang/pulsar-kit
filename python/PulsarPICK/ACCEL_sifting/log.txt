@@ -1,0 +1,3 @@
+This program performs candidate sifting for PRESTO ACCEL/JERK searches, applying duplicate removal, DM consistency checks, and harmonic filtering to identify significant pulsar candidates.
+
+The final diagnostic output is a merged image that vertically combines the prepfold folded time domain series plots with the corresponding DM–Sigma plot for efficient visual inspection.
