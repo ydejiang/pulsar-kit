@@ -144,7 +144,7 @@ def plot_dm_sigma(cand, outdir="./zmax_sifting/DM_sigma_plots"):
     ax.legend(fontsize=8)
     ax.set_xlabel("Trial DM (cm$^{-3}$ pc)")
     ax.set_ylabel("Sigma")
-    ax.set_title("#. " + cand.filename, loc="right", fontsize=6)
+    ax.set_title("#. " + cand.filename, loc="right", fontsize=8)
     for spine in ax.spines.values():
         spine.set_linewidth(0.5)
     ax.tick_params(direction="in")
