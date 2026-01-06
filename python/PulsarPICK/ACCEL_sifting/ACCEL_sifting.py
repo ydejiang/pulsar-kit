@@ -214,8 +214,10 @@ if len(cands):
         outprefix = accelfile
         accelfile = accelfile + ".cand"
         datfile = accelfile.split("_ACCEL")[0] + ".dat"
-        #cmd = f"prepfold -topo -nosearch -noxwin -n 64 -npart 128 -accelcand {candnum} -accelfile {accelfile} -o {outprefix} {datfile}"
-        cmd = f"""prepfold -topo -nosearch -noxwin -n 64 -npart 128 -accelcand {candnum} -accelfile {accelfile} -o {outprefix} {datfile} && python ${{py_combine_plots}} ./{outprefix}_*_Cand_{candnum}.pfd.png ./zmax_sifting/DM_sigma_plots/{outprefix}_Cand_{candnum}.png -output ./zmax_sifting/prepfold_plots/{outprefix}_ACCEL_Cand_{candnum}.png"""
+        P_ms = cand.p * 1e3
+        P_tag = f"{P_ms:.5f}ms"
+        #cmd = f"prepfold -topo -nosearch -noxwin -n 64 -npart 128 -accelcand {candnum} -accelfile {accelfile} -o {P_tag}-{outprefix} {datfile}"
+        cmd = f"""prepfold -topo -nosearch -noxwin -n 64 -npart 128 -accelcand {candnum} -accelfile {accelfile} -o {P_tag}-{outprefix} {datfile} && python ${{py_combine_plots}} ./{P_tag}-{outprefix}_*_Cand_{candnum}.pfd.png ./zmax_sifting/DM_sigma_plots/{outprefix}_Cand_{candnum}.png -output ./zmax_sifting/prepfold_plots/{P_tag}-{outprefix}_ACCEL_Cand_{candnum}.png"""
         print(cmd, file=sys.stderr)
     #"""
 
