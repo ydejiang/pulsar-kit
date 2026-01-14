@@ -503,6 +503,18 @@ registry.cn-hangzhou.aliyuncs.com/pulsars/ubuntu22.04   v8.28   026e8dc2e432   4
  passwd (in chenyujie): cyj1001
 
 # 容器中的命令都是在用户chenyujie下创建的，进入容器需要source /home/chenyujie/.bashrc或者cp /home/chenyujie/.bashrc到自己主目录下即可。
+#####*****************************************************************************************************************************
+# root
+#Ubunto系统使用podman管理镜像，调用ubunto图形界面生效解决如下：
+xhost + && podman run -itd --name pulsars --privileged -e DISPLAY=$DISPLAY -v /home/data:/home/data -v /tmp/.X11-unix:/tmp/.X11-unix:rw registry.cn-hangzhou.aliyuncs.com/pulsars/ubuntu22.04:latest /bin/bash
+podman exec -it pulsars /bin/bash
+##
+podman stop pulsars_new
+podman rm pulsars_new
+
+### pyplotres.py调用实效解决：
+apt update && apt install -y libxcb-cursor0 libxcb-xinerama0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-shape0 libxcb-sync1 libxcb-xfixes0 libxcb-xkb1 libxkbcommon-x11-0 libxcb-glx0 libxcb-present0 libxcb-composite0 libxcb-damage0 libxcb-dpms0 libxcb-record0 libxcb-screensaver0 libxcb-xtest0 libqt5gui5 libqt5widgets5 libqt5core5a libgl1-mesa-glx libgl1-mesa-dri`
+#####*****************************************************************************************************************************
 ```
 ### polarization calibration
 ```
