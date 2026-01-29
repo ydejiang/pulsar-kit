@@ -88,7 +88,7 @@
     <details><summary><code>BASSET</code></summary>https://github.com/caojhNAOC/BASSET</details>
     </td>
     <td>
-          <details><summary><code>BASSET</code></summary>https://github.com/caojhNAOC/BASSET</details>
+    <details><summary><code>INCEPTION</code></summary>INjeCtion toolkit for pulsar sEarch Pipeline validaTION: https://github.com/erc-compact/inception</details>
     </td>
   </tr>
 </table>
