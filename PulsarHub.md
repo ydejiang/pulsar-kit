@@ -87,7 +87,9 @@
     <td>
     <details><summary><code>BASSET</code></summary>https://github.com/caojhNAOC/BASSET</details>
     </td>
-    <td></td>
+    <td>
+          <details><summary><code>BASSET</code></summary>https://github.com/caojhNAOC/BASSET</details>
+    </td>
   </tr>
 </table>
 
