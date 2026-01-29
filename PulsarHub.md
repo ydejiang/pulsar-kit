@@ -59,7 +59,7 @@
   </tr>
   <tr>
     <td>
-      <details><summary><code>RIPTIDE</code></summary>https://github.com/v-morello/riptide<br>https://riptide-ffa.readthedocs.io/en/latest/</details>
+      <details><summary><code>RIPTIDE</code></summary>https://github.com/v-morello/riptide<br>https://riptide-ffa.readthedocs.io/en/latest/<br>PFINDER:https://github.com/Boltfox/PFINDER</details>
     </td>
     <td>
       <details><summary><code>PYSOLATOR</code></summary>http://alex88ridolfi.altervista.org/pagine/pulsar_software_PYSOLATOR.html<br>https://github.com/mcbernadich/demodulate-search</details>
