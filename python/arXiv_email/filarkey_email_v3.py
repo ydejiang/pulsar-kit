@@ -245,8 +245,8 @@ a:hover {
 }
 
 .abstract-label {
-    font-weight: bold;
-    color: #008000;
+#    font-weight: bold;
+    color: #4b5cc4;
 }
 
 .abstract-details {
@@ -255,7 +255,7 @@ a:hover {
 
 .abstract-summary {
     display: inline;
-    color: #008000;
+    color: #4b5cc4;
     cursor: pointer;
     white-space: nowrap;
     margin-left: 4px;
@@ -268,12 +268,12 @@ a:hover {
 
 .more-text {
     display: inline;
-    color: #008000;
+    color: #4b5cc4;
 }
 
 .less-text {
     display: none;
-    color: #008000;
+    color: #4b5cc4;
 }
 
 .abstract-details[open] .more-text {
