@@ -122,7 +122,9 @@
     <td>
     <details><summary><code>Astronomical Times</code></summary>https://lweb.cfa.harvard.edu/~jzhao/times.html</details>
     </td>
-    <td></td>
+    <td>
+    <details><summary><code>Pulsar Orbit</code></summary>fitorb.py:https://github.com/scottransom/presto/blob/12cfd0f4e73170be3b4de8446bb66f8a4233065f/bin/fitorb.py<br>pulsar_orbit_solver:https://github.com/mcbernadich/pulsar_orbit_solver</details>
+    </td>
     <td></td>
   </tr>
 </table>
