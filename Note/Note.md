@@ -687,3 +687,56 @@ screen -d yourname -> 远程detach某个session
 screen -d -r yourname -> 结束当前session并回到yourname这个session
 
 ```
+
+### Linux
+```
+(base) [yindejiang@localhost home]$ ls
+ls: cannot access data1: Input/output error
+ls: cannot access data2: Input/output error
+ls: cannot access data3: Input/output error
+ls: cannot access data4: Input/output error
+ls: cannot access data5: Input/output error
+chenyujie   data1  data4  data777   liuhuiping  newdisk    test         wuchanghao
+daiyinfeng  data2  data5  heshasha  liwenze     share      tianjinfa    xululu
+data        data3  data6  libaoda   liyaowei    shiansong  wangyinpeng  yindejiang
+(base) [yindejiang@localhost home]$ mount | grep -E 'data1|data2|data3|data4|data777'
+/dev/sdc on /home/data1 type xfs (rw,relatime,seclabel,attr2,inode64,noquota)
+/dev/sdd on /home/data2 type xfs (rw,relatime,seclabel,attr2,inode64,noquota)
+/dev/sde on /home/data3 type xfs (rw,relatime,seclabel,attr2,inode64,noquota)
+/dev/sdf on /home/data4 type xfs (rw,relatime,seclabel,attr2,inode64,noquota)
+(base) [yindejiang@localhost home]$ mount | grep -E 'data1|data2|data3|data4|data5'
+/dev/sdc on /home/data1 type xfs (rw,relatime,seclabel,attr2,inode64,noquota)
+/dev/sdd on /home/data2 type xfs (rw,relatime,seclabel,attr2,inode64,noquota)
+/dev/sde on /home/data3 type xfs (rw,relatime,seclabel,attr2,inode64,noquota)
+/dev/sdf on /home/data4 type xfs (rw,relatime,seclabel,attr2,inode64,noquota)
+/dev/sdg on /home/data5 type xfs (rw,relatime,seclabel,attr2,inode64,noquota)
+(base) [yindejiang@localhost home]$ sudo umount /home/data1
+[sudo] password for yindejiang: 
+umount: /home/data1: target is busy.
+        (In some cases useful info about processes that use
+         the device is found by lsof(8) or fuser(1))
+(base) [yindejiang@localhost home]$ sudo umount -l /home/data1
+(base) [yindejiang@localhost home]$ ls
+ls: cannot access data2: Input/output error
+ls: cannot access data3: Input/output error
+ls: cannot access data4: Input/output error
+ls: cannot access data5: Input/output error
+chenyujie   data1  data4  data777   liuhuiping  newdisk    test         wuchanghao
+daiyinfeng  data2  data5  heshasha  liwenze     share      tianjinfa    xululu
+data        data3  data6  libaoda   liyaowei    shiansong  wangyinpeng  yindejiang
+(base) [yindejiang@localhost home]$ sudo umount -l /home/data2
+(base) [yindejiang@localhost home]$ sudo umount -l /home/data3
+(base) [yindejiang@localhost home]$ sudo umount -l /home/data4
+(base) [yindejiang@localhost home]$ sudo umount -l /home/data5
+(base) [yindejiang@localhost home]$ ls
+chenyujie   data1  data4  data777   liuhuiping  newdisk    test         wuchanghao
+daiyinfeng  data2  data5  heshasha  liwenze     share      tianjinfa    xululu
+data        data3  data6  libaoda   liyaowei    shiansong  wangyinpeng  yindejiang
+(base) [yindejiang@localhost home]$ ls
+
+###
+ mount -t xfs -o nouuid /dev/()   /()
+ mount -t xfs -o nouuid /dev/sdd /home/data4
+```
+
+
